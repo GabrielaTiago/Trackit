@@ -14,6 +14,7 @@ export default function Login() {
     function handleLogin(event) {
         event.preventDefault();
         setLoading(true);
+        
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email, password });
 
         promise.then(() => navigate("/hoje"));
@@ -54,7 +55,7 @@ export default function Login() {
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -89,7 +90,7 @@ const Container = styled.div`
     }
 
     button{
-        width: 303px;
+        width: 100%;
         height: 45px;
         background: #52B6FF;
         font-size: 20.976px;
