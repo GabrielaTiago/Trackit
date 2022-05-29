@@ -1,18 +1,21 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import AddHabits from '../../Components/AddHabit';
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
 
 export default function Habits() {
+    const [add, setAdd] = useState(false);
+
     return (
         <>
             <Header />
             <Main>
-                <div>
+                <div className='habits'>
                     <h2>Meus hábitos</h2>
-                    <button>+</button>
+                    <button onClick={() => setAdd(true)}>+</button>
                 </div>
-                <AddHabits />
+                {add ? <AddHabits /> : null}
                 <p>
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </p>
@@ -31,7 +34,7 @@ const Main = styled.main`
     flex-direction: column;
     align-items: center;
 
-    div{
+    .habits{
         width: 100%;
         height: 35px;
         margin: 28px 0;
