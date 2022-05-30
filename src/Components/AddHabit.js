@@ -19,17 +19,16 @@ function Day({ nameDay, selectDay, setSelectDay, id }) {
         }
     }
     return (
-        <DayButton selected={selected}
+        <DayButton
+            selected={selected}
             onClick={() => days(id)}>
             {nameDay}
         </DayButton>
     );
 }
 
-export default function AddHabits() {
+export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, selectDay, setSelectDay }) {
     const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" }];
-    const [nameHabit, setNameHabit] = useState([]);
-    const [selectDay, setSelectDay] = useState([]);
     const [saving, setSaving] = useState(false);
     const { tasks } = useContext(AuthContext);
 
@@ -68,7 +67,7 @@ export default function AddHabits() {
             </span>
 
             <ActionButtons>
-                <h3>Cancelar</h3>
+                <h3 onClick={() => setAdd(!add)}>Cancelar</h3>
                 <div onClick={send}>Salvar</div>
             </ActionButtons>
         </NewHabit>

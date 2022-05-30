@@ -10,10 +10,12 @@ import AuthContext from '../../Contexts/Auth/AuthContext';
 
 export default function Habits() {
     const [add, setAdd] = useState(false);
+    const [nameHabit, setNameHabit] = useState([]);
+    const [selectDay, setSelectDay] = useState([]);
     const [listHabits, setListHabits] = useState([]);
     const { tasks } = useContext(AuthContext);
 
-    useEffect(() => {
+    function GetHabits() {
         const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
 
@@ -21,8 +23,12 @@ export default function Habits() {
             setListHabits([...res.data]);
         })
 
-        promise.catch((res) => console.log(res.response.data.message));
-    }, [])
+        promise.catch((res) => alert(`${res.response.data.message}`));
+    }
+
+    useEffect(() => {
+        GetHabits();
+    }, []);
 
     return (
         <>
@@ -32,10 +38,17 @@ export default function Habits() {
                     <h2>Meus hábitos</h2>
                     <AddButton onClick={() => setAdd(!add)}>+</AddButton>
                 </div>
-                {add ? <AddHabits /> : <></>}
+                {add ?
+                    <AddHabits
+                        add={add}
+                        setAdd={setAdd}
+                        nameHabit={nameHabit}
+                        setNameHabit={setNameHabit}
+                        selectDay={selectDay}
+                        setSelectDay={setSelectDay}/> : <></>}
 
                 {listHabits.length !== 0
-                    ? <ListAllHabits listHabits={listHabits} />
+                    ? <ListAllHabits listHabits={listHabits} GetHabits={GetHabits} />
                     : <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
                 }
             </Main>

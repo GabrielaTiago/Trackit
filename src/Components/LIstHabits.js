@@ -1,9 +1,23 @@
 import styled from "styled-components";
 import { BsTrash } from 'react-icons/bs';
+import axios from "axios";
+import { useContext, useState } from "react";
+import AuthContext from "../Contexts/Auth/AuthContext";
 
-export default function ListAllHabits({ listHabits }) {
+export default function ListAllHabits({ listHabits, GetHabits }) {
     const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" }];
+    const { tasks } = useContext(AuthContext);
 
+    function Delete(id) {
+        const confirmDelete = window.confirm("Deseja mesmo deletar este hábito?");
+
+        if (confirmDelete) {
+            const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
+            const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
+            promise.then(() => GetHabits());
+            promise.catch((res) => alert(`${res.response.data.message}`))
+        }
+    }
     return (
         <>
             {listHabits.map((list, index) => {
@@ -19,7 +33,7 @@ export default function ListAllHabits({ listHabits }) {
                                 })}
                             </span>
                         </ListHabits>
-                        <div><BsTrash /></div>
+                        <div><BsTrash onClick={() => Delete(list.id)} /></div>
                     </Container>
                 )
             })
@@ -39,8 +53,6 @@ const Container = styled.div`
     justify-content: space-between;
 
     div{
-        Width:13px;
-        height: 15px;
         color: #666666;
     }
 `

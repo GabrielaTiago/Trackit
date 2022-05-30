@@ -22,7 +22,8 @@ export default function Login() {
 
         promise.then((res) => { 
             setTasks(res.data);
-            navigate("/hoje")});
+            navigate("/hoje");
+        });
             
         promise.catch((res) => alert(`${res.response.data.message}`))
     }
