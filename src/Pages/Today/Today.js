@@ -7,7 +7,7 @@ export default function Today() {
         <>
             <Header />
             <Main>
-
+                
             </Main>
             <Footer />
         </>

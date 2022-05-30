@@ -48,7 +48,6 @@ const Main = styled.main`
         color: #126BA5;
     }
 
-    
     p{
         width: 100%;
         height: auto;

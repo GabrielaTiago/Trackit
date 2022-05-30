@@ -1,24 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-function Day({ days, nameDay, selectDay, setSelectDay, id }) {
+function Day({ nameDay, selectDay, setSelectDay, id }) {
     const [selected, setSelected] = useState(false);
 
     function days(id) {
-        let alreadySelected = selectDay.some(day => day === id);
-
-        // setSelected(!selected)
+        const alreadySelected = selectDay.some(day => day === id);
+        setSelected(!selected);
 
         if (!alreadySelected) {
             setSelectDay([...selectDay, id]);
-            setSelected(!selected);
-            
-            console.log(selectDay)
         }
         else {
-            // const newDays = selectDay.filter(day => day !== id);
-            // setSelectDay(newDays);
-            selectDay.splice(0, 1)
+            selectDay.splice(selectDay.indexOf(id), 1)
             setSelectDay([...selectDay])
         }
     }
@@ -31,9 +25,10 @@ function Day({ days, nameDay, selectDay, setSelectDay, id }) {
 }
 
 export default function AddHabits() {
-    const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" },];
+    const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" }];
     const [nameHabit, setNameHabit] = useState([]);
     const [selectDay, setSelectDay] = useState([]);
+    console.log(selectDay)
 
     return (
         <NewHabit>
