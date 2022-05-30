@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import AuthContext from "../Contexts/Auth/AuthContext";
+import { ThreeDots } from 'react-loader-spinner';
 
 function Day({ nameDay, selectDay, setSelectDay, id }) {
     const [selected, setSelected] = useState(false);
@@ -27,21 +28,24 @@ function Day({ nameDay, selectDay, setSelectDay, id }) {
     );
 }
 
-export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, selectDay, setSelectDay }) {
+export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, selectDay, setSelectDay, listHabits, setListHabits }) {
     const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" }];
     const [saving, setSaving] = useState(false);
     const { tasks } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
 
     function send() {
         if (nameHabit.length !== 0 && selectDay.length !== 0) {
             setSaving(true);
 
             const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
-
             const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
                 { name: nameHabit, days: selectDay },
                 config
             )
+
+            promise.then((res) => {setListHabits([...listHabits, res.data]); setNameHabit(""); setSelectDay("")});
+            promise.catch((res) => alert(res.response.data.message));
         }
     }
 
@@ -68,7 +72,7 @@ export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, select
 
             <ActionButtons>
                 <h3 onClick={() => setAdd(!add)}>Cancelar</h3>
-                <div onClick={send}>Salvar</div>
+                {loading ? <div><ThreeDots color="#ffffff" height={40} width={40} /></div> : <div onClick={() => {send(); setAdd(!add)}}>Salvar</div>}
             </ActionButtons>
         </NewHabit>
     );

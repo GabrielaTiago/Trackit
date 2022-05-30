@@ -45,7 +45,10 @@ export default function Habits() {
                         nameHabit={nameHabit}
                         setNameHabit={setNameHabit}
                         selectDay={selectDay}
-                        setSelectDay={setSelectDay}/> : <></>}
+                        setSelectDay={setSelectDay}
+                        listHabits={listHabits}
+                        setListHabits={setListHabits}
+                    /> : <></>}
 
                 {listHabits.length !== 0
                     ? <ListAllHabits listHabits={listHabits} GetHabits={GetHabits} />
