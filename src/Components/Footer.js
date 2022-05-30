@@ -2,9 +2,43 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import axios from 'axios';
+import { useEffect, useState, useContext } from 'react';
+import ProgressContext from '../Contexts/Auth/ProgressContext';
+import AuthContext from '../Contexts/Auth/AuthContext';
+
 
 export default function Footer() {
     const navigate = useNavigate();
+    const { progress, setProgress } = useContext(ProgressContext);
+    const { tasks } = useContext(AuthContext);
+    const [today, setToday] = useState([]);
+
+    useEffect(() => {
+        GetHabitsCurrentDay();
+        fillProgress();
+
+    }, [today]);
+
+    function GetHabitsCurrentDay() {
+        const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
+        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
+
+        promisse.then((res) => {
+            setToday(res.data);
+
+        })
+    }
+
+    function fillProgress() {
+        let progressValue = today.map((value => value.done ? 1 : 0));
+
+        if(progressValue.length > 0){
+            progressValue = progressValue.reduce((acumulator, current) => acumulator + current);
+        }
+
+        setProgress(Math.round(progressValue * 100 / today.length));
+    }
 
     return (
         <Container>
@@ -12,6 +46,7 @@ export default function Footer() {
             <Progress onClick={() => navigate("/hoje")}>
                 <CircularProgressbar
                     text={`Hoje`}
+                    value={progress}
                     background
                     backgroundPadding={5}
                     styles={buildStyles({
@@ -30,6 +65,7 @@ export default function Footer() {
 const Container = styled.footer`
     width: 100%;
     max-height: 70px;
+    //totaldehabitosdodiainteiro  numerodehabitosfeitos reduceparaencontraressenumb  total numerohabitosfeito*100 / totaldehabitosdodiainteiro;
     background-color: #ffffff;
     display: flex;
     align-items: center;
@@ -45,4 +81,4 @@ const Progress = styled.div`
     width: 91px;
     height: 91px;
     margin-bottom: 40px;
-`
+    `

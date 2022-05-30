@@ -2,54 +2,23 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
-import { BsCheckLg } from "react-icons/bs";
+import AllTodayHabits from '../../Components/AllTodayHabits';
 import { useContext, useEffect, useState, } from 'react';
 import AuthContext from '../../Contexts/Auth/AuthContext';
-
-function AllTodayHabits({ todayHabits, setTodayHabits, tasks}) {
-    
-    function IsDone(id, index){
-        const localValue = todayHabits[index];
-        localValue.done = !localValue.done;
-       
-        const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
-
-        if(localValue.done == true){
-            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,{}, config);
-    
-            promise.then(() => setTodayHabits([...todayHabits]));
-            promise.catch((res) => alert(`${res.response.data.message}`));
-        }
-        else{
-            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,{}, config);
-    
-            promise.then(() => setTodayHabits([...todayHabits]));
-            promise.catch((res) => alert(`${res.response.data.message}`));
-        }
-    }
-
-    return (
-        <>
-            {todayHabits.map((value, index) =>
-                <TodayTask key={index}>
-                    <TodayData>
-                        <h3>{value.name}</h3>
-                        <Goals>
-                            <h4>Sequência atual: {value.currentSequence} dias</h4>
-                            <h4>Seu recorde: {value.highestSequence} dias</h4>
-                        </Goals>
-                    </TodayData>
-                    <Check index={index} selected={value.done} id={value.id} onClick={() => { IsDone(value.id, index);}}><BsCheckLg /></Check>
-                </TodayTask>
-            )}
-        </>
-    );
-}
-
+import dayjs from 'dayjs';
+import "dayjs/locale/pt-br";
+import ProgressContext from '../../Contexts/Auth/ProgressContext';
 
 export default function Today() {
     const { tasks } = useContext(AuthContext);
+    const { progress } = useContext(ProgressContext);
     const [todayHabits, setTodayHabits] = useState([]);
+    const days = dayjs().locale('pt-br').format('dddd, DD/MM');
+    const dayOfWeek = days[0].toUpperCase() + days.substring([1]);
+    
+    useEffect(() => {
+        GetTodayHabits();
+    }, []);
 
     function GetTodayHabits() {
         const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
@@ -59,18 +28,14 @@ export default function Today() {
         promise.catch((res) => alert(`${res.response.data.message}`));
     }
 
-    useEffect(() => {
-        GetTodayHabits();
-    }, []);
-
     return (
         <>
             <Header />
             <Main>
                 <Container>
                     <TodayMetrics>
-                        <h2>Segunda, 17/05</h2>
-                        <p>Nenhum hábito concluído ainda</p>
+                        <h2>{dayOfWeek}</h2>
+                        {todayHabits.length > 1 ? <h6>{progress}% dos hábitos concluídos</h6> : <p>Nenhum hábito concluído ainda</p>}
                     </TodayMetrics>
                     <AllTodayHabits
                         todayHabits={todayHabits}
@@ -100,6 +65,10 @@ const Main = styled.main`
         line-height: 22px;
         color: #BABABA;
     }
+
+    h6{
+        color: #8FC549;
+    }
 `
 const Container = styled.div`
 
@@ -108,7 +77,6 @@ const TodayMetrics = styled.div`
     margin: 28px 0;
     display: flex;
     flex-direction: column;
-
 `
 const TodayTask = styled.div`
     width: 100%;

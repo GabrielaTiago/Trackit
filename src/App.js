@@ -5,22 +5,26 @@ import Habits from "./Pages/Habits/Habits";
 import Today from "./Pages/Today/Today";
 import History from "./Pages/History/History";
 import AuthContext from "./Contexts/Auth/AuthContext";
+import ProgressContext from "./Contexts/Auth/ProgressContext";
 import { useState } from "react";
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
+  const [progress, setProgress] = useState(0);
 
   return (
-    <BrowserRouter>
+    <ProgressContext.Provider value={{progress, setProgress}}>
       <AuthContext.Provider value={{ tasks, setTasks }}>
-        <Routes>
-          <Route path="/" element={<Login />}></Route>
-          <Route path="/cadastro" element={<SingUp />}></Route>
-          <Route path="/habitos" element={<Habits />}></Route>
-          <Route path="/hoje" element={<Today />}></Route>
-          <Route path="/historico" element={<History />}></Route>
-        </Routes>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />}></Route>
+            <Route path="/cadastro" element={<SingUp />}></Route>
+            <Route path="/habitos" element={<Habits />}></Route>
+            <Route path="/hoje" element={<Today />}></Route>
+            <Route path="/historico" element={<History />}></Route>
+          </Routes>
+        </BrowserRouter>
       </AuthContext.Provider>
-    </BrowserRouter>
+    </ProgressContext.Provider>
   )
 }
