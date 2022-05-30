@@ -1,5 +1,7 @@
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import AuthContext from "../Contexts/Auth/AuthContext";
 
 function Day({ nameDay, selectDay, setSelectDay, id }) {
     const [selected, setSelected] = useState(false);
@@ -13,7 +15,7 @@ function Day({ nameDay, selectDay, setSelectDay, id }) {
         }
         else {
             selectDay.splice(selectDay.indexOf(id), 1)
-            setSelectDay([...selectDay])
+            setSelectDay([...selectDay]);
         }
     }
     return (
@@ -28,7 +30,21 @@ export default function AddHabits() {
     const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" }];
     const [nameHabit, setNameHabit] = useState([]);
     const [selectDay, setSelectDay] = useState([]);
-    console.log(selectDay)
+    const [saving, setSaving] = useState(false);
+    const { tasks } = useContext(AuthContext);
+
+    function send() {
+        if (nameHabit.length !== 0 && selectDay.length !== 0) {
+            setSaving(true);
+
+            const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
+
+            const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
+                { name: nameHabit, days: selectDay },
+                config
+            )
+        }
+    }
 
     return (
         <NewHabit>
@@ -36,6 +52,7 @@ export default function AddHabits() {
                 type="text"
                 placeholder="Nome do hábito"
                 value={nameHabit}
+                required
                 onChange={e => setNameHabit(e.target.value)}
             />
 
@@ -52,7 +69,7 @@ export default function AddHabits() {
 
             <ActionButtons>
                 <h3>Cancelar</h3>
-                <div>Salvar</div>
+                <div onClick={send}>Salvar</div>
             </ActionButtons>
         </NewHabit>
     );
@@ -70,8 +87,7 @@ const NewHabit = styled.div`
 
     input, span button{
         border: 1px solid #CFCFCF;
-        border-radius: 5px;
-        
+        border-radius: 5px;  
     }
     
     input{

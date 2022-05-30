@@ -1,11 +1,28 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AddHabits from '../../Components/AddHabit';
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
+import ListAllHabits from '../../Components/LIstHabits';
+import AuthContext from '../../Contexts/Auth/AuthContext';
+
 
 export default function Habits() {
     const [add, setAdd] = useState(false);
+    const [listHabits, setListHabits] = useState([]);
+    const { tasks } = useContext(AuthContext);
+
+    useEffect(() => {
+        const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
+        const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
+
+        promise.then((res) => {
+            setListHabits([...res.data]);
+        })
+
+        promise.catch((res) => console.log(res.response.data.message));
+    }, [])
 
     return (
         <>
@@ -16,9 +33,11 @@ export default function Habits() {
                     <AddButton onClick={() => setAdd(!add)}>+</AddButton>
                 </div>
                 {add ? <AddHabits /> : <></>}
-                <p>
-                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-                </p>
+
+                {listHabits.length !== 0
+                    ? <ListAllHabits listHabits={listHabits} />
+                    : <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
+                }
             </Main>
             <Footer />
         </>

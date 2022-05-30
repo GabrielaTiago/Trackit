@@ -4,8 +4,7 @@ import AuthContext from '../Contexts/Auth/AuthContext';
 
 
 export default function Header(){
-    const { tasks, setTasks } = useContext(AuthContext);
-
+    const { tasks } = useContext(AuthContext);
     const imgAPI = tasks.image;
     
     return(

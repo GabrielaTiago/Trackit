@@ -1,23 +1,29 @@
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import trackit from '../../Assets/Images/trackit.png'
 import { ThreeDots } from 'react-loader-spinner';
+import AuthContext from "../../Contexts/Auth/AuthContext";
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const { tasks, setTasks } = useContext(AuthContext);
     const navigate = useNavigate();
+    
 
     function handleLogin(event) {
         event.preventDefault();
         setLoading(true);
-        
+
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email, password });
 
-        promise.then(() => navigate("/hoje"));
+        promise.then((res) => { 
+            setTasks(res.data);
+            navigate("/hoje")});
+            
         promise.catch((res) => alert(`${res.response.data.message}`))
     }
 
@@ -32,7 +38,7 @@ export default function Login() {
                     onChange={e => setEmail(e.target.value)}
                     required
                 />
-                
+
                 <input
                     type="password"
                     placeholder="senha"
@@ -40,7 +46,7 @@ export default function Login() {
                     onChange={e => setPassword(e.target.value)}
                     required
                 />
-                
+
                 {loading ?
                     <div><ThreeDots color="#ffffff" height={40} width={40} /></div> :
                     <button type="submit" >Entrar</button>
