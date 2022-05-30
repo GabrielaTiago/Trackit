@@ -37,6 +37,7 @@ export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, select
     function send() {
         if (nameHabit.length !== 0 && selectDay.length !== 0) {
             setSaving(true);
+            setLoading(true);
 
             const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
             const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",

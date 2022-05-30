@@ -10,22 +10,28 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [disable, setDisable] = useState(false);
     const { setTasks } = useContext(AuthContext);
     const navigate = useNavigate();
-    
+
 
     function handleLogin(event) {
         event.preventDefault();
         setLoading(true);
+        setDisable(true);
 
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email, password });
 
-        promise.then((res) => { 
+        promise.then((res) => {
             setTasks(res.data);
             navigate("/hoje");
         });
-            
-        promise.catch((res) => alert(`${res.response.data.message}`))
+
+        promise.catch((res) => {
+            setLoading(false);
+            setDisable(false);
+            alert(`${res.response.data.message}`);
+        })
     }
 
     return (
@@ -37,6 +43,7 @@ export default function Login() {
                     placeholder="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    disabled= {disable}
                     required
                 />
 
@@ -45,12 +52,13 @@ export default function Login() {
                     placeholder="senha"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
+                    disabled={disable}
                     required
                 />
 
                 {loading ?
                     <div><ThreeDots color="#ffffff" height={40} width={40} /></div> :
-                    <button type="submit" >Entrar</button>
+                    <button type="submit" disabled={disable} >Entrar</button>
                 }
             </form>
             <Link to="/cadastro">
@@ -117,5 +125,7 @@ const Container = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        background: #52B6FF;
+        border-radius: 5px;
     }
 `

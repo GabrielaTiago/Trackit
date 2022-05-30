@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BsTrash } from 'react-icons/bs';
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AuthContext from "../Contexts/Auth/AuthContext";
 
 export default function ListAllHabits({ listHabits, GetHabits }) {

@@ -12,13 +12,20 @@ export default function SingUp() {
     const [image, setImage] = useState('');
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [disable, setDisable] = useState(false);
+
 
     function handleSingUp(event) {
         event.preventDefault();
         setLoading(true);
+        setDisable(true);
+
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email, password, name, image });
         promise.then(() => navigate("/"));
-        promise.catch((res) => alert(`${res.response.data.message}`))
+        promise.catch((res) => {
+            setLoading(false);
+            setDisable(false);
+            alert(`${res.response.data.message}`)})
     }
 
     return (
@@ -30,6 +37,7 @@ export default function SingUp() {
                     placeholder="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    disabled={disable}
                     required
                 />
 
@@ -38,6 +46,7 @@ export default function SingUp() {
                     placeholder="senha"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
+                    disabled={disable}
                     required
                 />
 
@@ -46,6 +55,7 @@ export default function SingUp() {
                     placeholder="nome"
                     value={name}
                     onChange={e => setName(e.target.value)}
+                    disabled={disable}
                     required
                 />
 
@@ -54,6 +64,7 @@ export default function SingUp() {
                     placeholder="foto"
                     value={image}
                     onChange={e => setImage(e.target.value)}
+                    disabled={disable}
                     required
                 />
 
@@ -125,5 +136,7 @@ const Container = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        background: #52B6FF;
+        border-radius: 5px;
     }
 `
