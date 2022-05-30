@@ -35,7 +35,7 @@ export default function Today() {
                 <Container>
                     <TodayMetrics>
                         <h2>{dayOfWeek}</h2>
-                        {todayHabits.length > 1 ? <h6>{progress}% dos hábitos concluídos</h6> : <p>Nenhum hábito concluído ainda</p>}
+                        {progress === 0 ? <p>Nenhum hábito concluído ainda</p> : <h6>{progress}% dos hábitos concluídos</h6> }
                     </TodayMetrics>
                     <AllTodayHabits
                         todayHabits={todayHabits}

@@ -6,9 +6,9 @@ export default function AllTodayHabits({ todayHabits, setTodayHabits, tasks }) {
 
     function IsDone(id, index) {
         const localValue = todayHabits[index];
-        
+
         const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
-        
+
         if (localValue.done === true) {
 
             localValue.done = !localValue.done;
@@ -39,9 +39,14 @@ export default function AllTodayHabits({ todayHabits, setTodayHabits, tasks }) {
                 <TodayTask key={index}>
                     <TodayData>
                         <h3>{value.name}</h3>
-                        <Goals >
-                            <h4>Sequência atual: {value.currentSequence} dias</h4>
-                            <h4>Seu recorde: {value.highestSequence} dias</h4>
+                        <Goals>
+                            {value.done
+                                ? <h4>Sequência atual: <span>{value.currentSequence}{value.currentSequence === 1 && value.currentSequence === 0 ? "dia" : "dias"}</span></h4>
+                                : <h4>Sequência atual:{value.currentSequence} {value.currentSequence === 1 && value.currentSequence === 0 ? "dia" : "dias"}</h4>}
+
+                            {(value.currentSequence === value.highestSequence && value.highestSequence !== 0)
+                                ? <h4>Seu recorde: <Span>{value.highestSequence} {value.currentSequence === 1 && value.currentSequence === 0 ? "dia" : "dias"}</Span></h4> 
+                                : <h4>Seu recorde: {value.highestSequence}{value.currentSequence === 1 && value.currentSequence === 0 ? "dia" : "dias"}</h4>}
                         </Goals>
                     </TodayData>
                     <Check index={index} selected={value.done} id={value.id} onClick={() => { IsDone(value.id, index); }}><BsCheckLg /></Check>
@@ -94,4 +99,8 @@ const Goals = styled.div`
         line-height: 16px;
         color: #666666;
     }
+`
+
+const Span = styled.span`
+    color: #8FC549;
 `

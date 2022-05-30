@@ -15,7 +15,7 @@ function Day({ nameDay, selectDay, setSelectDay, id }) {
             setSelectDay([...selectDay, id]);
         }
         else {
-            selectDay.splice(selectDay.indexOf(id), 1)
+            selectDay.splice(selectDay.indexOf(id), 1);
             setSelectDay([...selectDay]);
         }
     }
@@ -30,13 +30,13 @@ function Day({ nameDay, selectDay, setSelectDay, id }) {
 
 export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, selectDay, setSelectDay, listHabits, setListHabits }) {
     const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" }];
-    const [saving, setSaving] = useState(false);
     const { tasks } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
+    const [disable, setDisable] = useState(false);
 
     function send() {
         if (nameHabit.length !== 0 && selectDay.length !== 0) {
-            setSaving(true);
+            setDisable(true)
             setLoading(true);
 
             const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
@@ -56,11 +56,12 @@ export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, select
                 type="text"
                 placeholder="Nome do hábito"
                 value={nameHabit}
+                disabled={disable}
                 required
                 onChange={e => setNameHabit(e.target.value)}
             />
 
-            <span>
+            <span  disabled={disable}>
                 {weekdays.map((value) =>
                     <Day
                         key={value.id}
@@ -73,7 +74,7 @@ export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, select
 
             <ActionButtons>
                 <h3 onClick={() => setAdd(!add)}>Cancelar</h3>
-                {loading ? <div><ThreeDots color="#ffffff" height={40} width={40} /></div> : <div onClick={() => {send(); setAdd(!add)}}>Salvar</div>}
+                {loading ? <div><ThreeDots color="#ffffff" height={40} width={40}  disabled={disable}/></div> : <div onClick={() => {send(); setAdd(!add)}}>Salvar</div>}
             </ActionButtons>
         </NewHabit>
     );

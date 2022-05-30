@@ -7,7 +7,6 @@ import { useEffect, useState, useContext } from 'react';
 import ProgressContext from '../Contexts/Auth/ProgressContext';
 import AuthContext from '../Contexts/Auth/AuthContext';
 
-
 export default function Footer() {
     const navigate = useNavigate();
     const { progress, setProgress } = useContext(ProgressContext);
@@ -65,7 +64,6 @@ export default function Footer() {
 const Container = styled.footer`
     width: 100%;
     max-height: 70px;
-    //totaldehabitosdodiainteiro  numerodehabitosfeitos reduceparaencontraressenumb  total numerohabitosfeito*100 / totaldehabitosdodiainteiro;
     background-color: #ffffff;
     display: flex;
     align-items: center;

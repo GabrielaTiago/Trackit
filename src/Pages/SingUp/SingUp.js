@@ -128,6 +128,8 @@ const Container = styled.div`
     }
     
     p{
+        font-family: 'Lexend Deca';
+        font-weight: 400;
         text-decoration: underline;
         color: #52B6FF;
     }
