@@ -7,7 +7,6 @@ export default function Header(){
     const { tasks, setTasks } = useContext(AuthContext);
 
     const imgAPI = tasks.image;
-    console.log(tasks)
     
     return(
         <Head>

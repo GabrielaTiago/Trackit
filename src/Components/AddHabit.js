@@ -1,15 +1,60 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+function Day({ days, nameDay, selectDay, setSelectDay, id }) {
+    const [selected, setSelected] = useState(false);
+
+    function days(id) {
+        let alreadySelected = selectDay.some(day => day === id);
+
+        // setSelected(!selected)
+
+        if (!alreadySelected) {
+            setSelectDay([...selectDay, id]);
+            setSelected(!selected);
+            
+            console.log(selectDay)
+        }
+        else {
+            // const newDays = selectDay.filter(day => day !== id);
+            // setSelectDay(newDays);
+            selectDay.splice(0, 1)
+            setSelectDay([...selectDay])
+        }
+    }
+    return (
+        <DayButton selected={selected}
+            onClick={() => days(id)}>
+            {nameDay}
+        </DayButton>
+    );
+}
+
 export default function AddHabits() {
-    const weekdays = [{ weekday: "D" }, { weekday: "S" }, { weekday: "T" }, { weekday: "Q" }, { weekday: "Q" }, { weekday: "S" }, { weekday: "S" },];
+    const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" },];
+    const [nameHabit, setNameHabit] = useState([]);
+    const [selectDay, setSelectDay] = useState([]);
 
     return (
-        <NewHabit >
-            <input type="text" placeholder="Nome do hábito" />
+        <NewHabit>
+            <input
+                type="text"
+                placeholder="Nome do hábito"
+                value={nameHabit}
+                onChange={e => setNameHabit(e.target.value)}
+            />
+
             <span>
-                {weekdays.map((value, index) => <button key={index}>{value.weekday}</button>)}
+                {weekdays.map((value) =>
+                    <Day
+                        key={value.id}
+                        id={value.id}
+                        nameDay={value.weekday}
+                        selectDay={selectDay}
+                        setSelectDay={setSelectDay}
+                    />)}
             </span>
+
             <ActionButtons>
                 <h3>Cancelar</h3>
                 <div>Salvar</div>
@@ -28,19 +73,19 @@ const NewHabit = styled.div`
     padding: 18px 18px 15px 19px;
     margin-bottom: 29px;
 
-
     input, span button{
-        color: #D4D4D4;
-        border: 1px solid #D4D4D4;
+        border: 1px solid #CFCFCF;
         border-radius: 5px;
-        background: none;
+        
     }
-
+    
     input{
         width: 100%;
         height: 45px;
         padding-left: 11px;
         font-size: 20px;
+        background: none;
+        color: #CFCFCF;
     }
     
     span{
@@ -48,15 +93,15 @@ const NewHabit = styled.div`
         justify-content: flex-start;
         gap: 5px;
         margin: 8px 0 29px;
-
     }
-
-    span button{
-        background: none;
-        height: 30px;
-        width: 30px;
-    }
-
+`
+const DayButton = styled.button`
+    background: none;
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    background-color: ${(props) => props.selected ? "#CFCFCF" : "none"};
+    color: ${(props) => props.selected ? "#FFFFFF" : "#CFCFCF"};
 `
 
 const ActionButtons = styled.div`
