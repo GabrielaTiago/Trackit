@@ -1,4 +1,5 @@
 export * from "./AddHabits/AddHabits";
+export * from "./Button/Button"
 export * from "./Footer/Footer";
 export * from "./Header/Header";
 export * from "./Input/Input";

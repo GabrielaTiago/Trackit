@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import { signUp } from "../../shared/services/auth/authApi";
-import { Input, Logo } from "../../shared/components";
+import { Button, Input, Logo } from "../../shared/components";
 
 export function SingUp() {
   const [email, setEmail] = useState("");
@@ -74,7 +74,7 @@ export function SingUp() {
             <ThreeDots color="#ffffff" height={40} width={40} />
           </div>
         ) : (
-          <button type="submit">Cadastrar</button>
+          <Button type={"submit"} disabled={disable} text={"Cadastrar"} />
         )}
       </form>
       <Link to="/">
@@ -101,17 +101,6 @@ const Container = styled.div`
     margin-bottom: 25px;
   }
 
-  button {
-    width: 100%;
-    height: 45px;
-    background: #52b6ff;
-    font-size: 20.976px;
-    line-height: 26px;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-  }
-
   p {
     font-family: "Lexend Deca";
     font-weight: 400;
@@ -119,7 +108,6 @@ const Container = styled.div`
     color: #52b6ff;
   }
 
-  button,
   div {
     display: flex;
     justify-content: center;

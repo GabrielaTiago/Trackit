@@ -4,7 +4,7 @@ import { ThreeDots } from "react-loader-spinner";
 import styled from "styled-components";
 import { useAuthContext } from "../../shared/contexts";
 import { signIn } from "../../shared/services/auth/authApi";
-import { Input, Logo } from "../../shared/components";
+import { Button, Input, Logo } from "../../shared/components";
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -60,9 +60,7 @@ export function Login() {
             <ThreeDots color="#ffffff" height={40} width={40} />
           </div>
         ) : (
-          <button type="submit" disabled={disable}>
-            Entrar
-          </button>
+          <Button type={"submit"} disabled={disable} text={"Entrar"} />
         )}
       </form>
       <Link to="/cadastro">
@@ -89,17 +87,6 @@ const Container = styled.div`
     margin-bottom: 25px;
   }
 
-  button {
-    width: 100%;
-    height: 45px;
-    background: #52b6ff;
-    font-size: 20.976px;
-    line-height: 26px;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-  }
-
   p {
     font-family: "Lexend Deca";
     font-weight: 400;
@@ -108,7 +95,6 @@ const Container = styled.div`
     color: #52b6ff;
   }
 
-  button,
   div {
     display: flex;
     justify-content: center;
