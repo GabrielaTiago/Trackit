@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   AddHabits,
@@ -6,7 +6,7 @@ import {
   Header,
   ListAllHabits,
 } from "../../shared/components";
-import AuthContext from "../../shared/contexts/Auth/AuthContext";
+import { useAuthContext } from "../../shared/contexts";
 import { getHabits } from "../../shared/services/habits/habitsApi";
 
 export function Habits() {
@@ -14,16 +14,16 @@ export function Habits() {
   const [nameHabit, setNameHabit] = useState([]);
   const [selectDay, setSelectDay] = useState([]);
   const [listHabits, setListHabits] = useState([]);
-  const { tasks } = useContext(AuthContext);
+  const { userData } = useAuthContext();
 
   const GetHabits = useCallback(async () => {
     try {
-      const response = await getHabits(tasks.token);
+      const response = await getHabits(userData.token);
       setListHabits(response);
     } catch (err) {
       alert(`Erro ao listar seus hábitos - ${err.data.message}`);
     }
-  }, [tasks.token]);
+  }, [userData.token]);
 
   useEffect(() => {
     GetHabits();

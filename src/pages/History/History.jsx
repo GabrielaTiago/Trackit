@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Footer, Header } from "../../shared/components";
-import AuthContext from "../../shared/contexts/Auth/AuthContext";
+import { useAuthContext } from "../../shared/contexts";
 
 export function History() {
-  const { tasks } = useContext(AuthContext);
+  const { userData } = useAuthContext();
   const [historyHabits, setHistoryHabits] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export function History() {
   }, []);
 
   function GetHistory() {
-    const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
+    const config = { headers: { Authorization: `Bearer ${userData.token}` } };
     const promise = axios.get(
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/daily",
       config

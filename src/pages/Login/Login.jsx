@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 import styled from "styled-components";
 import trackit from "../../assets/images/trackit.png";
-import { ThreeDots } from "react-loader-spinner";
-import AuthContext from "../../shared/contexts/Auth/AuthContext";
+import { useAuthContext } from "../../shared/contexts";
 import { signIn } from "../../shared/services/auth/authApi";
 
 export function Login() {
@@ -11,7 +11,7 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
-  const { setTasks } = useContext(AuthContext);
+  const { setUserData } = useAuthContext();
   const navigate = useNavigate();
 
   function handleLogin(event) {
@@ -25,7 +25,7 @@ export function Login() {
     try {
       const response = await signIn({ email, password });
       if (response) {
-        setTasks(response);
+        setUserData(response);
         navigate("/hoje");
       }
     } catch (err) {

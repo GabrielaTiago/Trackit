@@ -1,2 +1,2 @@
-export * from "./Auth/AuthContext"
+export * from "./AuthContext"
 export * from "./ProgressContext"

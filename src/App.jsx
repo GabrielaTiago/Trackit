@@ -1,19 +1,18 @@
-import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
-import { ProgressContextProvider } from "./shared/contexts";
-import AuthContext from "./shared/contexts/Auth/AuthContext";
+import {
+  AuthContextProvider,
+  ProgressContextProvider,
+} from "./shared/contexts";
 
 export function App() {
-  const [tasks, setTasks] = useState([]);
-
   return (
     <ProgressContextProvider>
-      <AuthContext.Provider value={{ tasks, setTasks }}>
+      <AuthContextProvider>
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>
-      </AuthContext.Provider>
+      </AuthContextProvider>
     </ProgressContextProvider>
   );
 }

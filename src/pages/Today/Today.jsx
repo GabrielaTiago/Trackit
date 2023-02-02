@@ -1,14 +1,13 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { AllTodayHabits, Footer, Header } from "../../shared/components";
-import AuthContext from "../../shared/contexts/Auth/AuthContext";
 import { getTodayHabits } from "../../shared/services/habits/habitsApi";
-import { useProgressContext } from "../../shared/contexts";
+import { useAuthContext, useProgressContext } from "../../shared/contexts";
 
 export function Today() {
-  const { tasks } = useContext(AuthContext);
+  const { userData } = useAuthContext();
   const { progress } = useProgressContext();
   const [todayHabits, setTodayHabits] = useState([]);
   const days = dayjs().locale("pt-br").format("dddd, DD/MM");
@@ -16,13 +15,13 @@ export function Today() {
   
   const GetTodayHabits = useCallback(async () => {
     try {
-      const response = await getTodayHabits(tasks.token);
+      const response = await getTodayHabits(userData.token);
 
       setTodayHabits(response);
     } catch (err) {
       alert(`Erro ao listar seus hábitos de hoje - ${err.data.message}`);
     }
-  }, [tasks.token]);
+  }, [userData.token]);
   
   useEffect(() => {
     GetTodayHabits();
@@ -45,7 +44,7 @@ export function Today() {
           <AllTodayHabits
             todayHabits={todayHabits}
             setTodayHabits={setTodayHabits}
-            tasks={tasks}
+            userData={userData}
           />
         </Container>
       </Main>

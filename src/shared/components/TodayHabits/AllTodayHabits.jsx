@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { BsCheckLg } from "react-icons/bs";
 import { checkHabit, uncheckHabit } from "../../services/habits/habitsApi";
 
-export function AllTodayHabits({ todayHabits, setTodayHabits, tasks }) {
+export function AllTodayHabits({ todayHabits, setTodayHabits, userData }) {
   function IsDone(id, index) {
     const localValue = todayHabits[index];
 
@@ -11,13 +11,13 @@ export function AllTodayHabits({ todayHabits, setTodayHabits, tasks }) {
       localValue.currentSequence = localValue.currentSequence - 1;
       localValue.highestSequence = localValue.highestSequence - 1;
 
-      markAsUndone(id, tasks.token);
+      markAsUndone(id, userData.token);
     } else {
       localValue.done = !localValue.done;
       localValue.currentSequence = localValue.currentSequence + 1;
       localValue.highestSequence = localValue.highestSequence + 1;
 
-      markAsDone(id, tasks.token);
+      markAsDone(id, userData.token);
     }
   }
 

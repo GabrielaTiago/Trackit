@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import styled from "styled-components";
 import { BsTrash } from "react-icons/bs";
-import AuthContext from "../../contexts/Auth/AuthContext";
+import { useAuthContext } from "../../contexts";
 import { deleteHabit } from "../../services/habits/habitsApi";
 
 export function ListAllHabits({ listHabits, GetHabits }) {
@@ -14,14 +13,14 @@ export function ListAllHabits({ listHabits, GetHabits }) {
     { id: 5, weekday: "S" },
     { id: 6, weekday: "S" },
   ];
-  const { tasks } = useContext(AuthContext);
+  const { userData } = useAuthContext();
 
   async function Delete(id) {
     const confirmDelete = window.confirm("Deseja mesmo deletar este hábito?");
 
     if (confirmDelete) {
       try {
-        await deleteHabit(id, tasks.token);
+        await deleteHabit(id, userData.token);
         GetHabits();
       } catch (err) {
         alert(`Erro ao deletar seu hábito - ${err.data.message}`);

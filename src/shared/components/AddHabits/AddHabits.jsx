@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
-import styled from "styled-components";
-import AuthContext from "../../contexts/Auth/AuthContext";
+import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import styled from "styled-components";
+import { useAuthContext } from "../../contexts";
+
 import { createHabit } from "../../services/habits/habitsApi";
 
 function Day({ nameDay, selectDay, setSelectDay, id }) {
@@ -44,7 +45,7 @@ export function AddHabits({
     { id: 5, weekday: "S" },
     { id: 6, weekday: "S" },
   ];
-  const { tasks } = useContext(AuthContext);
+  const { userData } = useAuthContext();
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
 
@@ -56,7 +57,7 @@ export function AddHabits({
       try {
         const response = await createHabit(
           { name: nameHabit, days: selectDay },
-          tasks.token
+          userData.token
         );
 
         if (response) {

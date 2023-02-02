@@ -1,17 +1,15 @@
-import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios';
-import { useProgressContext } from '../../contexts';
-
-import AuthContext from '../../contexts/Auth/AuthContext';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import styled from 'styled-components';
+import 'react-circular-progressbar/dist/styles.css';
+import { useAuthContext, useProgressContext } from '../../contexts';
 
 export function Footer() {
     const navigate = useNavigate();
     const { progress, setProgress } = useProgressContext();
-    const { tasks } = useContext(AuthContext);
+    const { userData } = useAuthContext();
     const [today, setToday] = useState([]);
 
     useEffect(() => {
@@ -21,7 +19,7 @@ export function Footer() {
     }, [today]);
 
     function GetHabitsCurrentDay() {
-        const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
+        const config = { headers: { Authorization: `Bearer ${userData.token}` } };
         const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
 
         promisse.then((res) => {
