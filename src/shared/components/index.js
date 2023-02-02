@@ -1,9 +1,10 @@
 export * from "./AddHabits/AddHabits";
-export * from "./Button/Button"
+export * from "./Button/Button";
 export * from "./Footer/Footer";
+export * from "./Form/Form";
 export * from "./GoTo/GoTo";
 export * from "./Header/Header";
 export * from "./Input/Input";
 export * from "./ListHabits/ListHabits";
-export* from "./Logo/Logo"
+export * from "./Logo/Logo";
 export * from "./TodayHabits/AllTodayHabits";

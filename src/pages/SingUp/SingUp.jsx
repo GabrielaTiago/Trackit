@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import { signUp } from "../../shared/services/auth/authApi";
-import { Button, GoTo, Input, Logo } from "../../shared/components";
+import { Button, Form, GoTo, Input, Logo } from "../../shared/components";
 
 export function SingUp() {
   const [email, setEmail] = useState("");
@@ -39,7 +39,7 @@ export function SingUp() {
   return (
     <Container>
       <Logo />
-      <form onSubmit={handleSingUp}>
+      <Form onSubmit={handleSingUp}>
         <Input
           type={"email"}
           placeholder={"email"}
@@ -76,7 +76,7 @@ export function SingUp() {
         ) : (
           <Button type={"submit"} disabled={disable} text={"Cadastrar"} />
         )}
-      </form>
+      </Form>
       <GoTo to={"/"} text={"Já tem uma conta? Faça login!"} />
     </Container>
   );
@@ -89,15 +89,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  form {
-    width: 303px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 25px;
-  }
 
   div {
     display: flex;

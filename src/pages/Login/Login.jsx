@@ -4,7 +4,7 @@ import { ThreeDots } from "react-loader-spinner";
 import styled from "styled-components";
 import { useAuthContext } from "../../shared/contexts";
 import { signIn } from "../../shared/services/auth/authApi";
-import { Button, GoTo, Input, Logo } from "../../shared/components";
+import { Button, Form, GoTo, Input, Logo } from "../../shared/components";
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -39,7 +39,7 @@ export function Login() {
   return (
     <Container>
       <Logo />
-      <form onSubmit={handleLogin}>
+      <Form onSubmit={handleLogin}>
         <Input
           type={"email"}
           placeholder={"email"}
@@ -62,7 +62,7 @@ export function Login() {
         ) : (
           <Button type={"submit"} disabled={disable} text={"Entrar"} />
         )}
-      </form>
+      </Form>
       <GoTo to={"/cadastro"} text={"Não tem uma conta? Cadastre-se!"} />
     </Container>
   );
@@ -75,15 +75,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  form {
-    width: 303px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 25px;
-  }
 
   div {
     display: flex;
