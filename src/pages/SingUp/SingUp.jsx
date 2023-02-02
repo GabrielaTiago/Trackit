@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import { signUp } from "../../shared/services/auth/authApi";
-import { Button, Form, GoTo, Input, Logo } from "../../shared/components";
+import {
+  AuthWrapper,
+  Button,
+  Form,
+  GoTo,
+  Input,
+  Logo,
+} from "../../shared/components";
 
 export function SingUp() {
   const [email, setEmail] = useState("");
@@ -37,7 +43,7 @@ export function SingUp() {
   }
 
   return (
-    <Container>
+    <AuthWrapper>
       <Logo />
       <Form onSubmit={handleSingUp}>
         <Input
@@ -78,23 +84,6 @@ export function SingUp() {
         )}
       </Form>
       <GoTo to={"/"} text={"Já tem uma conta? Faça login!"} />
-    </Container>
+    </AuthWrapper>
   );
 }
-
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #52b6ff;
-    border-radius: 5px;
-  }
-`;

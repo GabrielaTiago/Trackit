@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import styled from "styled-components";
 import { useAuthContext } from "../../shared/contexts";
 import { signIn } from "../../shared/services/auth/authApi";
-import { Button, Form, GoTo, Input, Logo } from "../../shared/components";
+import {
+  AuthWrapper,
+  Button,
+  Form,
+  GoTo,
+  Input,
+  Logo,
+} from "../../shared/components";
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -37,7 +43,7 @@ export function Login() {
   }
 
   return (
-    <Container>
+    <AuthWrapper>
       <Logo />
       <Form onSubmit={handleLogin}>
         <Input
@@ -64,23 +70,7 @@ export function Login() {
         )}
       </Form>
       <GoTo to={"/cadastro"} text={"Não tem uma conta? Cadastre-se!"} />
-    </Container>
+    </AuthWrapper>
   );
 }
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #52b6ff;
-    border-radius: 5px;
-  }
-`;
