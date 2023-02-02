@@ -17,3 +17,9 @@ export function createHabit(body, token) {
 
   return response;
 }
+
+export function deleteHabit(id, token) {
+  const response = api.delete(`/habits/${id}`, null, token);
+
+  return response;
+}
