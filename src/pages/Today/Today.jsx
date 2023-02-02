@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { AllTodayHabits, Footer, Header } from "../../shared/components";
 import AuthContext from "../../shared/contexts/Auth/AuthContext";
 import ProgressContext from "../../shared/contexts/Auth/ProgressContext";
+import { getTodayHabits } from "../../shared/services/habits/habitsApi";
 
 export function Today() {
   const { tasks } = useContext(AuthContext);
@@ -13,21 +13,21 @@ export function Today() {
   const [todayHabits, setTodayHabits] = useState([]);
   const days = dayjs().locale("pt-br").format("dddd, DD/MM");
   const dayOfWeek = days[0].toUpperCase() + days.substring([1]);
+  
+  const GetTodayHabits = useCallback(async () => {
+    try {
+      const response = await getTodayHabits(tasks.token);
 
+      setTodayHabits(response);
+    } catch (err) {
+      alert(`Erro ao listar seus hábitos de hoje - ${err.data.message}`);
+    }
+  }, [tasks.token]);
+  
   useEffect(() => {
     GetTodayHabits();
-  }, []);
+  }, [GetTodayHabits]);
 
-  function GetTodayHabits() {
-    const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
-    const promise = axios.get(
-      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",
-      config
-    );
-
-    promise.then((res) => setTodayHabits([...res.data]));
-    promise.catch((res) => alert(`${res.response.data.message}`));
-  }
 
   return (
     <>
