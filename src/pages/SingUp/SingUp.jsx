@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import trackit from '../../assets/images/trackit.png';
 import { ThreeDots } from 'react-loader-spinner';
 
-export default function SingUp() {
+export function SingUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');

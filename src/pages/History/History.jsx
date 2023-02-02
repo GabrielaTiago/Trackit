@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Footer, Header } from "../../shared/components";
 import AuthContext from "../../shared/contexts/Auth/AuthContext";
 
-export default function History() {
+export function History() {
   const { tasks } = useContext(AuthContext);
   const [historyHabits, setHistoryHabits] = useState([]);
 

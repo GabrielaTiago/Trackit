@@ -7,7 +7,7 @@ import { AllTodayHabits, Footer, Header } from "../../shared/components";
 import AuthContext from "../../shared/contexts/Auth/AuthContext";
 import ProgressContext from "../../shared/contexts/Auth/ProgressContext";
 
-export default function Today() {
+export function Today() {
   const { tasks } = useContext(AuthContext);
   const { progress } = useContext(ProgressContext);
   const [todayHabits, setTodayHabits] = useState([]);

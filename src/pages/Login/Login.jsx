@@ -6,7 +6,7 @@ import trackit from '../../assets/images/trackit.png'
 import { ThreeDots } from 'react-loader-spinner';
 import AuthContext from "../../shared/contexts/Auth/AuthContext";
 
-export default function Login() {
+export function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);

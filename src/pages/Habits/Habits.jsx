@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { AddHabits, Footer, Header, ListAllHabits } from "../../shared/components";
 import AuthContext from "../../shared/contexts/Auth/AuthContext";
 
-export default function Habits() {
+export function Habits() {
   const [add, setAdd] = useState(false);
   const [nameHabit, setNameHabit] = useState([]);
   const [selectDay, setSelectDay] = useState([]);
