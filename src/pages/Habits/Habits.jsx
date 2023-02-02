@@ -1,8 +1,13 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { AddHabits, Footer, Header, ListAllHabits } from "../../shared/components";
+import {
+  AddHabits,
+  Footer,
+  Header,
+  ListAllHabits,
+} from "../../shared/components";
 import AuthContext from "../../shared/contexts/Auth/AuthContext";
+import { getHabits } from "../../shared/services/habits/habitsApi";
 
 export function Habits() {
   const [add, setAdd] = useState(false);
@@ -11,23 +16,18 @@ export function Habits() {
   const [listHabits, setListHabits] = useState([]);
   const { tasks } = useContext(AuthContext);
 
-  function GetHabits() {
-    const config = { headers: { Authorization: `Bearer ${tasks.token}` } };
-    const promise = axios.get(
-      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
-      config
-    );
-
-    promise.then((res) => {
-      setListHabits([...res.data]);
-    });
-
-    promise.catch((res) => alert(`${res.response.data.message}`));
-  }
+  const GetHabits = useCallback(async () => {
+    try {
+      const response = await getHabits(tasks.token);
+      setListHabits(response);
+    } catch (err) {
+      alert(`Erro ao listar seus hábitos - ${err.data.message}`);
+    }
+  }, [tasks.token]);
 
   useEffect(() => {
     GetHabits();
-  }, []);
+  }, [GetHabits]);
 
   return (
     <>
