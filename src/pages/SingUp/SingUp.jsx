@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import trackit from "../../assets/images/trackit.png";
 import { ThreeDots } from "react-loader-spinner";
 import { signUp } from "../../shared/services/auth/authApi";
+import { Logo } from "../../shared/components";
 
 export function SingUp() {
   const [email, setEmail] = useState("");
@@ -38,7 +38,7 @@ export function SingUp() {
 
   return (
     <Container>
-      <img src={trackit} alt="img logo trackit" />
+      <Logo />
       <form onSubmit={handleSingUp}>
         <input
           type="text"
@@ -94,12 +94,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  img {
-    width: 180px;
-    height: 178.38px;
-    margin-bottom: 32.62px;
-  }
 
   form {
     width: 303px;
