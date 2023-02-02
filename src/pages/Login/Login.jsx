@@ -2,11 +2,11 @@ import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
-import trackit from '../../Assets/Images/trackit.png'
+import trackit from '../../assets/images/trackit.png'
 import { ThreeDots } from 'react-loader-spinner';
-import AuthContext from "../../Contexts/Auth/AuthContext";
+import AuthContext from "../../shared/contexts/Auth/AuthContext";
 
-export default function Login() {
+export function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);

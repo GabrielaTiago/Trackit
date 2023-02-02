@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useContext } from "react";
-import AuthContext from '../Contexts/Auth/AuthContext';
+import AuthContext from '../../contexts/Auth/AuthContext';
 
 
-export default function Header(){
+export function Header(){
     const { tasks } = useContext(AuthContext);
     const imgAPI = tasks.image;
     
