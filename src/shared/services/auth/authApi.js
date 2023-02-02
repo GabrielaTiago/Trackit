@@ -5,3 +5,10 @@ export function signUp(body) {
 
   return response;
 }
+
+export function signIn(body) {
+    const response = api.post("/auth/login", body);
+  
+    return response;
+  }
+  
