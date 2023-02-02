@@ -4,8 +4,8 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
-import ProgressContext from '../Contexts/Auth/ProgressContext';
-import AuthContext from '../Contexts/Auth/AuthContext';
+import ProgressContext from '../contexts/Auth/ProgressContext';
+import AuthContext from '../contexts/Auth/AuthContext';
 
 export default function Footer() {
     const navigate = useNavigate();

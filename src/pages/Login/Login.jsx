@@ -1,43 +1,49 @@
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
-import trackit from '../../Assets/Images/trackit.png';
+import trackit from '../../assets/images/trackit.png'
 import { ThreeDots } from 'react-loader-spinner';
+import AuthContext from "../../shared/contexts/Auth/AuthContext";
 
-export default function SingUp() {
+export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [image, setImage] = useState('');
-    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [disable, setDisable] = useState(false);
+    const { setTasks } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
-    function handleSingUp(event) {
+    function handleLogin(event) {
         event.preventDefault();
         setLoading(true);
         setDisable(true);
 
-        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email, password, name, image });
-        promise.then(() => navigate("/"));
+        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email, password });
+
+        promise.then((res) => {
+            setTasks(res.data);
+            navigate("/hoje");
+        });
+
         promise.catch((res) => {
             setLoading(false);
             setDisable(false);
-            alert(`${res.response.data.message}`)})
+            alert(`${res.response.data.message}`);
+        })
     }
 
     return (
         <Container>
             <img src={trackit} alt="img logo trackit" />
-            <form onSubmit={handleSingUp}>
+            <form onSubmit={handleLogin}>
                 <input
                     type="text"
                     placeholder="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    disabled={disable}
+                    disabled= {disable}
                     required
                 />
 
@@ -50,32 +56,13 @@ export default function SingUp() {
                     required
                 />
 
-                <input
-                    type="text"
-                    placeholder="nome"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    disabled={disable}
-                    required
-                />
-
-                <input
-                    type="text"
-                    placeholder="foto"
-                    value={image}
-                    onChange={e => setImage(e.target.value)}
-                    disabled={disable}
-                    required
-                />
-
                 {loading ?
                     <div><ThreeDots color="#ffffff" height={40} width={40} /></div> :
-                    <button type="submit" >Cadastrar</button>
+                    <button type="submit" disabled={disable} >Entrar</button>
                 }
-
             </form>
-            <Link to="/">
-                <p>Já tem uma conta? Faça login!</p>
+            <Link to="/cadastro">
+                <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
         </Container>
     );
@@ -88,6 +75,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 
     img{
         width: 180px;
@@ -126,10 +114,11 @@ const Container = styled.div`
         border: none;
         border-radius: 5px;
     }
-    
+
     p{
         font-family: 'Lexend Deca';
         font-weight: 400;
+        font-size: 13.976px;
         text-decoration: underline;
         color: #52B6FF;
     }

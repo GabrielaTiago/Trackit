@@ -4,8 +4,8 @@ import SingUp from "./pages/SingUp/SingUp";
 import Habits from "./pages/Habits/Habits";
 import Today from "./pages/Today/Today";
 import History from "./pages/History/History";
-import AuthContext from "./contexts/Auth/AuthContext";
-import ProgressContext from "./contexts/Auth/ProgressContext";
+import AuthContext from "./shared/contexts/Auth/AuthContext";
+import ProgressContext from "./shared/contexts/Auth/ProgressContext";
 import { useState } from "react";
 
 export function App() {

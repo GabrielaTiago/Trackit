@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Footer from "../../Components/Footer";
-import Header from "../../Components/Header";
-import AuthContext from '../../Contexts/Auth/AuthContext';
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import AuthContext from '../../shared/contexts/Auth/AuthContext';
 
 export default function History() {
     const {tasks} = useContext(AuthContext);

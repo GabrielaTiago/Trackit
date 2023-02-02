@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import styled from "styled-components";
-import AuthContext from "../Contexts/Auth/AuthContext";
+import AuthContext from "../contexts/Auth/AuthContext";
 import { ThreeDots } from 'react-loader-spinner';
 
 function Day({ nameDay, selectDay, setSelectDay, id }) {

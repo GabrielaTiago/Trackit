@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import AddHabits from '../../Components/AddHabit';
-import Footer from "../../Components/Footer";
-import Header from "../../Components/Header";
-import ListAllHabits from '../../Components/LIstHabits';
-import AuthContext from '../../Contexts/Auth/AuthContext';
+import AddHabits from '../../components/AddHabit';
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import ListAllHabits from '../../components/LIstHabits';
+import AuthContext from '../../shared/contexts/Auth/AuthContext';
 
 
 export default function Habits() {

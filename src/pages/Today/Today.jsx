@@ -1,13 +1,13 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import Footer from "../../Components/Footer";
-import Header from "../../Components/Header";
-import AllTodayHabits from '../../Components/AllTodayHabits';
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import AllTodayHabits from '../../components/AllTodayHabits';
 import { useContext, useEffect, useState, } from 'react';
-import AuthContext from '../../Contexts/Auth/AuthContext';
+import AuthContext from '../../shared/contexts/Auth/AuthContext';
 import dayjs from 'dayjs';
 import "dayjs/locale/pt-br";
-import ProgressContext from '../../Contexts/Auth/ProgressContext';
+import ProgressContext from '../../shared/contexts/Auth/ProgressContext';
 
 export default function Today() {
     const { tasks } = useContext(AuthContext);
