@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import styled from "styled-components";
-import AuthContext from "../contexts/Auth/AuthContext";
+import AuthContext from "../../contexts/Auth/AuthContext";
 import { ThreeDots } from 'react-loader-spinner';
 
 function Day({ nameDay, selectDay, setSelectDay, id }) {
@@ -28,7 +28,7 @@ function Day({ nameDay, selectDay, setSelectDay, id }) {
     );
 }
 
-export default function AddHabits({ add, setAdd, nameHabit, setNameHabit, selectDay, setSelectDay, listHabits, setListHabits }) {
+export function AddHabits({ add, setAdd, nameHabit, setNameHabit, selectDay, setSelectDay, listHabits, setListHabits }) {
     const weekdays = [{ id: 0, weekday: "D" }, { id: 1, weekday: "S" }, { id: 2, weekday: "T" }, { id: 3, weekday: "Q" }, { id: 4, weekday: "Q" }, { id: 5, weekday: "S" }, { id: 6, weekday: "S" }];
     const { tasks } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);

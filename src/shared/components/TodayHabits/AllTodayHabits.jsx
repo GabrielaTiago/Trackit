@@ -2,7 +2,7 @@ import axios from "axios";
 import styled from 'styled-components';
 import { BsCheckLg } from "react-icons/bs";
 
-export default function AllTodayHabits({ todayHabits, setTodayHabits, tasks }) {
+export function AllTodayHabits({ todayHabits, setTodayHabits, tasks }) {
 
     function IsDone(id, index) {
         const localValue = todayHabits[index];
