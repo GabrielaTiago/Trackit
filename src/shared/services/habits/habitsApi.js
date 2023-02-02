@@ -23,3 +23,15 @@ export function deleteHabit(id, token) {
 
   return response;
 }
+
+export function checkHabit(id, token) {
+  const response = api.post(`/habits/${id}/check`, null, token);
+
+  return response;
+}
+
+export function uncheckHabit(id, token) {
+  const response = api.post(`/habits/${id}/uncheck`, null, token);
+
+  return response;
+}
