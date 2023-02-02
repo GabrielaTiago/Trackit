@@ -2,8 +2,8 @@ import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import styled from "styled-components";
 import { useAuthContext } from "../../contexts";
-
 import { createHabit } from "../../services/habits/habitsApi";
+import { Input } from "../Input/Input";
 
 function Day({ nameDay, selectDay, setSelectDay, id }) {
   const [selected, setSelected] = useState(false);
@@ -76,13 +76,12 @@ export function AddHabits({
 
   return (
     <NewHabit>
-      <input
-        type="text"
-        placeholder="Nome do hábito"
+      <Input
+        type={"text"}
+        placeholder={"Nome do hábito"}
         value={nameHabit}
-        disabled={disable}
-        required
         onChange={(e) => setNameHabit(e.target.value)}
+        disabled={disable}
       />
 
       <span disabled={disable}>
