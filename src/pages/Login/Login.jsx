@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import styled from "styled-components";
 import { useAuthContext } from "../../shared/contexts";
 import { signIn } from "../../shared/services/auth/authApi";
-import { Button, Input, Logo } from "../../shared/components";
+import { Button, GoTo, Input, Logo } from "../../shared/components";
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -63,9 +63,7 @@ export function Login() {
           <Button type={"submit"} disabled={disable} text={"Entrar"} />
         )}
       </form>
-      <Link to="/cadastro">
-        <p>Não tem uma conta? Cadastre-se!</p>
-      </Link>
+      <GoTo to={"/cadastro"} text={"Não tem uma conta? Cadastre-se!"} />
     </Container>
   );
 }
@@ -85,14 +83,6 @@ const Container = styled.div`
     flex-direction: column;
     gap: 6px;
     margin-bottom: 25px;
-  }
-
-  p {
-    font-family: "Lexend Deca";
-    font-weight: 400;
-    font-size: 13.976px;
-    text-decoration: underline;
-    color: #52b6ff;
   }
 
   div {

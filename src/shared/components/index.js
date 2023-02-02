@@ -1,6 +1,7 @@
 export * from "./AddHabits/AddHabits";
 export * from "./Button/Button"
 export * from "./Footer/Footer";
+export * from "./GoTo/GoTo";
 export * from "./Header/Header";
 export * from "./Input/Input";
 export * from "./ListHabits/ListHabits";
