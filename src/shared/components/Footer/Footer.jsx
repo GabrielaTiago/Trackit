@@ -1,15 +1,16 @@
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios';
-import { useEffect, useState, useContext } from 'react';
-import ProgressContext from '../../contexts/Auth/ProgressContext';
+import { useProgressContext } from '../../contexts';
+
 import AuthContext from '../../contexts/Auth/AuthContext';
 
 export function Footer() {
     const navigate = useNavigate();
-    const { progress, setProgress } = useContext(ProgressContext);
+    const { progress, setProgress } = useProgressContext();
     const { tasks } = useContext(AuthContext);
     const [today, setToday] = useState([]);
 

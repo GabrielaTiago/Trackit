@@ -4,12 +4,12 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { AllTodayHabits, Footer, Header } from "../../shared/components";
 import AuthContext from "../../shared/contexts/Auth/AuthContext";
-import ProgressContext from "../../shared/contexts/Auth/ProgressContext";
 import { getTodayHabits } from "../../shared/services/habits/habitsApi";
+import { useProgressContext } from "../../shared/contexts";
 
 export function Today() {
   const { tasks } = useContext(AuthContext);
-  const { progress } = useContext(ProgressContext);
+  const { progress } = useProgressContext();
   const [todayHabits, setTodayHabits] = useState([]);
   const days = dayjs().locale("pt-br").format("dddd, DD/MM");
   const dayOfWeek = days[0].toUpperCase() + days.substring([1]);
