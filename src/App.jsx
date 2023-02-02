@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./Pages/Login/Login";
-import SingUp from "./Pages/SingUp/SingUp";
-import Habits from "./Pages/Habits/Habits";
-import Today from "./Pages/Today/Today";
-import History from "./Pages/History/History";
-import AuthContext from "./Contexts/Auth/AuthContext";
-import ProgressContext from "./Contexts/Auth/ProgressContext";
+import Login from "./pages/Login/Login";
+import SingUp from "./pages/SingUp/SingUp";
+import Habits from "./pages/Habits/Habits";
+import Today from "./pages/Today/Today";
+import History from "./pages/History/History";
+import AuthContext from "./contexts/Auth/AuthContext";
+import ProgressContext from "./contexts/Auth/ProgressContext";
 import { useState } from "react";
 
-export default function App() {
+export function App() {
   const [tasks, setTasks] = useState([]);
   const [progress, setProgress] = useState(0);
 
