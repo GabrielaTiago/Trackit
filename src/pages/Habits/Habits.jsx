@@ -5,6 +5,8 @@ import {
   Footer,
   Header,
   ListAllHabits,
+  NoData,
+  PageTitle,
 } from "../../shared/components";
 import { useAuthContext } from "../../shared/contexts";
 import { getHabits } from "../../shared/services/habits/habitsApi";
@@ -34,7 +36,7 @@ export function Habits() {
       <Header />
       <Main>
         <div className="habits">
-          <h2>Meus hábitos</h2>
+          <PageTitle>Meus hábitos</PageTitle>
           <AddButton onClick={() => setAdd(!add)}>+</AddButton>
         </div>
         {add ? (
@@ -55,10 +57,10 @@ export function Habits() {
         {listHabits.length !== 0 ? (
           <ListAllHabits listHabits={listHabits} GetHabits={GetHabits} />
         ) : (
-          <p>
+          <NoData>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
             começar a trackear!
-          </p>
+          </NoData>
         )}
       </Main>
       <Footer />
@@ -82,18 +84,6 @@ const Main = styled.main`
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-
-  h2 {
-    font-size: 23px;
-    color: #126ba5;
-  }
-
-  p {
-    width: 100%;
-    height: auto;
-    font-size: 17.98px;
-    color: #666666;
   }
 `;
 const AddButton = styled.button`

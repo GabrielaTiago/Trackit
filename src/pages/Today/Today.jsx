@@ -5,7 +5,7 @@ import {
   useHabitsContext,
   useProgressContext,
 } from "../../shared/contexts";
-import { AllTodayHabits, Footer, Header } from "../../shared/components";
+import { AllTodayHabits, Footer, Header, PageTitle } from "../../shared/components";
 import { getTodayHabits } from "../../shared/services/habits/habitsApi";
 import { formatWeekday } from "../../shared/utils";
 
@@ -34,7 +34,7 @@ export function Today() {
       <Main>
         <Container>
           <TodayMetrics>
-            <h2>{weekDay}</h2>
+            <PageTitle>{weekDay}</PageTitle>
             {progress === 0 ? (
               <p>Nenhum hábito concluído ainda</p>
             ) : (
@@ -53,12 +53,6 @@ const Main = styled.main`
   background-color: #f2f2f2;
   min-height: 100vh;
   padding: 70px 2%;
-
-  h2 {
-    font-size: 22.976px;
-    line-height: 29px;
-    color: #126ba5;
-  }
 
   p {
     font-size: 17.976px;
