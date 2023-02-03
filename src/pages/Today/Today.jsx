@@ -1,21 +1,19 @@
 import { useCallback, useEffect } from "react";
 import styled from "styled-components";
-import dayjs from "dayjs";
-import "dayjs/locale/pt-br";
-import { AllTodayHabits, Footer, Header } from "../../shared/components";
-import { getTodayHabits } from "../../shared/services/habits/habitsApi";
 import {
   useAuthContext,
   useHabitsContext,
   useProgressContext,
 } from "../../shared/contexts";
+import { AllTodayHabits, Footer, Header } from "../../shared/components";
+import { getTodayHabits } from "../../shared/services/habits/habitsApi";
+import { formatWeekday } from "../../shared/utils";
 
 export function Today() {
   const { userData } = useAuthContext();
   const { progress } = useProgressContext();
   const { setTodayHabits } = useHabitsContext();
-  const days = dayjs().locale("pt-br").format("dddd, DD/MM");
-  const dayOfWeek = days[0].toUpperCase() + days.substring([1]);
+  const weekDay = formatWeekday(); 
 
   const GetTodayHabits = useCallback(async () => {
     try {
@@ -36,7 +34,7 @@ export function Today() {
       <Main>
         <Container>
           <TodayMetrics>
-            <h2>{dayOfWeek}</h2>
+            <h2>{weekDay}</h2>
             {progress === 0 ? (
               <p>Nenhum hábito concluído ainda</p>
             ) : (
@@ -54,7 +52,7 @@ export function Today() {
 const Main = styled.main`
   background-color: #f2f2f2;
   min-height: 100vh;
-  padding: 70px 17px 70px 18px;
+  padding: 70px 2%;
 
   h2 {
     font-size: 22.976px;
