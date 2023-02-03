@@ -9,6 +9,7 @@ const Btn = styled.button`
   background: #52b6ff;
   border-radius: 5px;
   border: none;
+  cursor: pointer;
 `;
 
 export { Btn };

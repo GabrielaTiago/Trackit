@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
 import { signUp } from "../../shared/services/auth/authApi";
 import {
   AuthWrapper,
@@ -8,6 +7,7 @@ import {
   Form,
   GoTo,
   Input,
+  LoadingButton,
   Logo,
 } from "../../shared/components";
 
@@ -76,9 +76,7 @@ export function SingUp() {
         />
 
         {loading ? (
-          <div>
-            <ThreeDots color="#ffffff" height={40} width={40} />
-          </div>
+          <LoadingButton />
         ) : (
           <Button type={"submit"} disabled={disable} text={"Cadastrar"} />
         )}

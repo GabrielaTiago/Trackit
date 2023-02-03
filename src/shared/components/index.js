@@ -7,5 +7,6 @@ export * from "./GoTo/GoTo";
 export * from "./Header/Header";
 export * from "./Input/Input";
 export * from "./ListHabits/ListHabits";
+export * from "./LoadingButton/LoadingButton";
 export * from "./Logo/Logo";
 export * from "./TodayHabits/AllTodayHabits";
