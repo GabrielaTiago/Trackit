@@ -1,37 +1,21 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import styled from "styled-components";
 import "react-circular-progressbar/dist/styles.css";
-import { useAuthContext, useProgressContext } from "../../contexts";
 import { GoTo } from "../GoTo/GoTo";
+import {
+  useHabitsContext,
+  useProgressContext,
+} from "../../contexts";
 
 export function Footer() {
   const navigate = useNavigate();
   const { progress, setProgress } = useProgressContext();
-  const { userData } = useAuthContext();
-  const [today, setToday] = useState([]);
-
-  useEffect(() => {
-    GetHabitsCurrentDay();
-    fillProgress();
-  }, []);
-
-  function GetHabitsCurrentDay() {
-    const config = { headers: { Authorization: `Bearer ${userData.token}` } };
-    const promisse = axios.get(
-      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",
-      config
-    );
-
-    promisse.then((res) => {
-      setToday(res.data);
-    });
-  }
-
-  function fillProgress() {
-    let progressValue = today.map((value) => (value.done ? 1 : 0));
+  const { todayHabits } = useHabitsContext();
+  
+  const fillProgress = useCallback(() => {
+    let progressValue = todayHabits.map((value) => (value.done ? 1 : 0));
 
     if (progressValue.length > 0) {
       progressValue = progressValue.reduce(
@@ -39,15 +23,19 @@ export function Footer() {
       );
     }
 
-    setProgress(Math.round((progressValue * 100) / today.length));
-  }
+    setProgress(Math.round((progressValue * 100) / todayHabits.length));
+  }, [todayHabits, setProgress]);
+
+  useEffect(() => {
+    fillProgress();
+  }, [fillProgress]);
 
   return (
     <Container>
       <GoTo to={"/habitos"} text={"Hábitos"} />
       <Progress onClick={() => navigate("/hoje")}>
         <CircularProgressbar
-          text={`Hoje`}
+          text={"Hoje"}
           value={progress}
           background
           backgroundPadding={5}
