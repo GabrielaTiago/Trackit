@@ -10,6 +10,9 @@ const Btn = styled.button`
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  :hover {
+    filter: brightness(1.1);
+  }
 `;
 
 export { Btn };
