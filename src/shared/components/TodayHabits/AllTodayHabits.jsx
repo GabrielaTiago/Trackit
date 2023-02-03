@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { BsCheckLg } from "react-icons/bs";
 import { checkHabit, uncheckHabit } from "../../services/habits/habitsApi";
+import { useAuthContext, useHabitsContext } from "../../contexts";
 
-export function AllTodayHabits({ todayHabits, setTodayHabits, userData }) {
+export function AllTodayHabits() {
+  const { userData } = useAuthContext();
+  const { todayHabits, setTodayHabits } = useHabitsContext();
+
   function IsDone(id, index) {
     const localValue = todayHabits[index];
 

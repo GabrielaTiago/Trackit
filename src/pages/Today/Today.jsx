@@ -1,32 +1,34 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { AllTodayHabits, Footer, Header } from "../../shared/components";
 import { getTodayHabits } from "../../shared/services/habits/habitsApi";
-import { useAuthContext, useProgressContext } from "../../shared/contexts";
+import {
+  useAuthContext,
+  useHabitsContext,
+  useProgressContext,
+} from "../../shared/contexts";
 
 export function Today() {
   const { userData } = useAuthContext();
   const { progress } = useProgressContext();
-  const [todayHabits, setTodayHabits] = useState([]);
+  const { setTodayHabits } = useHabitsContext();
   const days = dayjs().locale("pt-br").format("dddd, DD/MM");
   const dayOfWeek = days[0].toUpperCase() + days.substring([1]);
-  
+
   const GetTodayHabits = useCallback(async () => {
     try {
       const response = await getTodayHabits(userData.token);
-
       setTodayHabits(response);
     } catch (err) {
       alert(`Erro ao listar seus hábitos de hoje - ${err.data.message}`);
     }
-  }, [userData.token]);
-  
+  }, [userData.token, setTodayHabits]);
+
   useEffect(() => {
     GetTodayHabits();
   }, [GetTodayHabits]);
-
 
   return (
     <>
@@ -41,11 +43,7 @@ export function Today() {
               <h6>{progress}% dos hábitos concluídos</h6>
             )}
           </TodayMetrics>
-          <AllTodayHabits
-            todayHabits={todayHabits}
-            setTodayHabits={setTodayHabits}
-            userData={userData}
-          />
+          <AllTodayHabits />
         </Container>
       </Main>
       <Footer />
