@@ -18,4 +18,12 @@ const InfoContainer = styled.div`
   gap: 8px;
 `;
 
-export { Container, InfoContainer };
+const WeekdaysContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 5px;
+`;
+
+export { Container, InfoContainer, WeekdaysContainer };
