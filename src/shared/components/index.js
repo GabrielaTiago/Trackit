@@ -1,4 +1,3 @@
-export * from "./AddHabits/AddHabits";
 export * from "./AuthWrapper/AuthWrapper";
 export * from "./Button/Button";
 export * from "./Footer/Footer";

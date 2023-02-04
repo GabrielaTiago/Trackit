@@ -1,22 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import {
-  AddHabits,
   Footer,
   Header,
   ListAllHabits,
   NoData,
   PageTitle,
 } from "../../shared/components";
-import { useAuthContext } from "../../shared/contexts";
+import { useAuthContext, useUserHabitsContext } from "../../shared/contexts";
 import { getHabits } from "../../shared/services/habits/habitsApi";
+import { AddNewHabit } from "./components/AddNewHabit/AddNewHabit";
 
 export function Habits() {
-  const [add, setAdd] = useState(false);
-  const [nameHabit, setNameHabit] = useState([]);
-  const [selectDay, setSelectDay] = useState([]);
   const [listHabits, setListHabits] = useState([]);
   const { userData } = useAuthContext();
+  const { toggleDivNewHabit, setToggleDivNewHabit } = useUserHabitsContext();
 
   const GetHabits = useCallback(async () => {
     try {
@@ -37,22 +35,11 @@ export function Habits() {
       <Main>
         <div className="habits">
           <PageTitle>Meus hábitos</PageTitle>
-          <AddButton onClick={() => setAdd(!add)}>+</AddButton>
+          <AddButton onClick={() => setToggleDivNewHabit(!toggleDivNewHabit)}>
+            +
+          </AddButton>
         </div>
-        {add ? (
-          <AddHabits
-            add={add}
-            setAdd={setAdd}
-            nameHabit={nameHabit}
-            setNameHabit={setNameHabit}
-            selectDay={selectDay}
-            setSelectDay={setSelectDay}
-            listHabits={listHabits}
-            setListHabits={setListHabits}
-          />
-        ) : (
-          <></>
-        )}
+        {toggleDivNewHabit && <AddNewHabit />}
 
         {listHabits.length !== 0 ? (
           <ListAllHabits listHabits={listHabits} GetHabits={GetHabits} />
