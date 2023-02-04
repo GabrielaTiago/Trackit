@@ -4,18 +4,21 @@ import {
   AuthContextProvider,
   HabistsContexctProvider,
   ProgressContextProvider,
+  UserHabistsContexctProvider
 } from "./shared/contexts";
 
 export function App() {
   return (
-    <HabistsContexctProvider>
-      <ProgressContextProvider>
-        <AuthContextProvider>
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </AuthContextProvider>
-      </ProgressContextProvider>
-    </HabistsContexctProvider>
+    <ProgressContextProvider>
+      <UserHabistsContexctProvider>
+        <HabistsContexctProvider>
+          <AuthContextProvider>
+            <BrowserRouter>
+              <AppRoutes />
+            </BrowserRouter>
+          </AuthContextProvider>
+        </HabistsContexctProvider>
+      </UserHabistsContexctProvider>
+    </ProgressContextProvider>
   );
 }
