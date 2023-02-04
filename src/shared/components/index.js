@@ -8,6 +8,7 @@ export * from "./Input/Input";
 export * from "./ListHabits/ListHabits";
 export * from "./LoadingButton/LoadingButton";
 export * from "./Logo/Logo";
+export * from "./Main/Main";
 export * from "./TodayHabits/AllTodayHabits";
 export * from "./Typography/NoData";
 export * from "./Typography/PageTitle";

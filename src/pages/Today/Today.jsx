@@ -5,7 +5,13 @@ import {
   useHabitsContext,
   useProgressContext,
 } from "../../shared/contexts";
-import { AllTodayHabits, Footer, Header, PageTitle } from "../../shared/components";
+import {
+  AllTodayHabits,
+  Footer,
+  Header,
+  Main,
+  PageTitle,
+} from "../../shared/components";
 import { getTodayHabits } from "../../shared/services/habits/habitsApi";
 import { formatWeekday } from "../../shared/utils";
 
@@ -13,7 +19,7 @@ export function Today() {
   const { userData } = useAuthContext();
   const { progress } = useProgressContext();
   const { setTodayHabits } = useHabitsContext();
-  const weekDay = formatWeekday(); 
+  const weekDay = formatWeekday();
 
   const GetTodayHabits = useCallback(async () => {
     try {
@@ -49,21 +55,6 @@ export function Today() {
   );
 }
 
-const Main = styled.main`
-  background-color: #f2f2f2;
-  min-height: 100vh;
-  padding: 70px 2%;
-
-  p {
-    font-size: 17.976px;
-    line-height: 22px;
-    color: #bababa;
-  }
-
-  h6 {
-    color: #8fc549;
-  }
-`;
 const Container = styled.div``;
 const TodayMetrics = styled.div`
   margin: 28px 0;

@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Footer, Header, NoData, PageTitle } from "../../shared/components";
+import {
+  Footer,
+  Header,
+  Main,
+  NoData,
+  PageTitle,
+} from "../../shared/components";
 import { useAuthContext } from "../../shared/contexts";
 
 export function History() {
@@ -29,20 +34,12 @@ export function History() {
       <Main>
         <div>
           <PageTitle>Histórico</PageTitle>
-          <NoData>Em breve você poderá ver o histórico dos seus hábitos aqui!</NoData>
+          <NoData>
+            Em breve você poderá ver o histórico dos seus hábitos aqui!
+          </NoData>
         </div>
       </Main>
       <Footer />
     </>
   );
 }
-
-const Main = styled.main`
-  background-color: #f2f2f2;
-  min-height: 100vh;
-  padding: 70px 2%;
-
-  div {
-    margin: 28px 0;
-  }
-`;
