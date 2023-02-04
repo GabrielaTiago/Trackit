@@ -1,9 +1,10 @@
 import {
+  ButtonsContainer,
   Container,
   InfoContainer,
   WeekdaysContainer,
 } from "./Styles";
-import { Day } from "../Buttons";
+import { Cancel, Day, Save } from "../Buttons";
 import { useUserHabitsContext } from "../../../../shared/contexts";
 import { Input } from "../../../../shared/components";
 import { weekdaysData } from "../../../../shared/mock";
@@ -12,7 +13,7 @@ export function AddNewHabit() {
   const { habitName, setHabitName, disabled } = useUserHabitsContext();
 
   return (
-    <Container disabled={disabled}>
+    <Container>
       <InfoContainer>
         <Input
           placeholder={"Nome do hábito"}
@@ -27,6 +28,10 @@ export function AddNewHabit() {
           })}
         </WeekdaysContainer>
       </InfoContainer>
+      <ButtonsContainer>
+        <Cancel />
+        <Save />
+      </ButtonsContainer>
     </Container>
   );
 }

@@ -26,4 +26,32 @@ const WeekdaysContainer = styled.div`
   gap: 5px;
 `;
 
-export { Container, InfoContainer, WeekdaysContainer };
+const ButtonsContainer = styled.div`
+  width: 100%;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 23px;
+
+  div {
+    width: 84px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    :hover {
+      filter: brightness(1.1);
+    }
+    :disabled {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+  }
+`;
+
+export { Container, InfoContainer, WeekdaysContainer, ButtonsContainer };

@@ -35,4 +35,14 @@ const DayBtn = styled.div`
   }
 `;
 
-export { NewBtn, DayBtn };
+const SaveBtn = styled.div`
+  color: #ffffff;
+  background-color: #52b6ff;
+`;
+
+const CancelBtn = styled.div`
+  color: #52b6ff;
+  background-color: none;
+`;
+
+export { NewBtn, DayBtn, SaveBtn, CancelBtn };
