@@ -10,11 +10,12 @@ import {
 import { useAuthContext, useUserHabitsContext } from "../../shared/contexts";
 import { getHabits } from "../../shared/services/habits/habitsApi";
 import { AddNewHabit } from "./components/AddNewHabit/AddNewHabit";
+import { New } from "./components/Buttons";
 
 export function Habits() {
   const [listHabits, setListHabits] = useState([]);
   const { userData } = useAuthContext();
-  const { toggleDivNewHabit, setToggleDivNewHabit } = useUserHabitsContext();
+  const { toggleDivNewHabit } = useUserHabitsContext();
 
   const GetHabits = useCallback(async () => {
     try {
@@ -35,9 +36,7 @@ export function Habits() {
       <Main>
         <div className="habits">
           <PageTitle>Meus hábitos</PageTitle>
-          <AddButton onClick={() => setToggleDivNewHabit(!toggleDivNewHabit)}>
-            +
-          </AddButton>
+          <New />
         </div>
         {toggleDivNewHabit && <AddNewHabit />}
 
@@ -72,18 +71,4 @@ const Main = styled.main`
     align-items: center;
     justify-content: space-between;
   }
-`;
-const AddButton = styled.button`
-  width: 40px;
-  height: 35px;
-  font-size: 26.98px;
-  line-height: 33.72px;
-  color: #ffffff;
-  background-color: #52b6ff;
-  border-radius: 5px;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;

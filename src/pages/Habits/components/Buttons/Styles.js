@@ -1,5 +1,21 @@
 import styled from "styled-components";
 
+const NewBtn = styled.div`
+  width: 40px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #ffffff;
+  background: #52b6ff;
+  border-radius: 4.63636px;
+  cursor: pointer;
+  :hover {
+    filter: brightness(1.1);
+  }
+`;
+
 const DayBtn = styled.div`
   height: 30px;
   width: 30px;
@@ -19,4 +35,4 @@ const DayBtn = styled.div`
   }
 `;
 
-export { DayBtn };
+export { NewBtn, DayBtn };
