@@ -6,6 +6,7 @@ import {
   Main,
   NoData,
   PageTitle,
+  PageTitleWrapper,
 } from "../../shared/components";
 import { useAuthContext } from "../../shared/contexts";
 
@@ -32,12 +33,12 @@ export function History() {
     <>
       <Header />
       <Main>
-        <div>
+        <PageTitleWrapper>
           <PageTitle>Histórico</PageTitle>
-          <NoData>
-            Em breve você poderá ver o histórico dos seus hábitos aqui!
-          </NoData>
-        </div>
+        </PageTitleWrapper>
+        <NoData>
+          Em breve você poderá ver o histórico dos seus hábitos aqui!
+        </NoData>
       </Main>
       <Footer />
     </>

@@ -9,6 +9,7 @@ export * from "./ListHabits/ListHabits";
 export * from "./LoadingButton/LoadingButton";
 export * from "./Logo/Logo";
 export * from "./Main/Main";
+export * from "./PageTitleWrapper/PageTitleWrapper";
 export * from "./TodayHabits/AllTodayHabits";
 export * from "./Typography/NoData";
 export * from "./Typography/PageTitle";

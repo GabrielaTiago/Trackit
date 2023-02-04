@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
+import { AddNewHabit } from "./components/AddNewHabit/AddNewHabit";
+import { New } from "./components/Buttons";
 import { useAuthContext, useUserHabitsContext } from "../../shared/contexts";
 import {
   Footer,
@@ -7,10 +9,9 @@ import {
   Main,
   NoData,
   PageTitle,
+  PageTitleWrapper,
 } from "../../shared/components";
 import { getHabits } from "../../shared/services/habits/habitsApi";
-import { AddNewHabit } from "./components/AddNewHabit/AddNewHabit";
-import { New } from "./components/Buttons";
 
 export function Habits() {
   const [listHabits, setListHabits] = useState([]);
@@ -34,10 +35,10 @@ export function Habits() {
     <>
       <Header />
       <Main>
-        <div className="habits">
+        <PageTitleWrapper>
           <PageTitle>Meus hábitos</PageTitle>
           <New />
-        </div>
+        </PageTitleWrapper>
         {toggleDivNewHabit && <AddNewHabit />}
 
         {listHabits.length !== 0 ? (
@@ -53,4 +54,3 @@ export function Habits() {
     </>
   );
 }
-
