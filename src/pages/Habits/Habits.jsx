@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
-import { AddNewHabit } from "./components/AddNewHabit/AddNewHabit";
+import { useCallback, useEffect } from "react";
+import { AddNewHabit, ListOfHabits } from "./components";
 import { New } from "./components/Buttons";
 import { useAuthContext, useUserHabitsContext } from "../../shared/contexts";
 import {
   Footer,
   Header,
-  ListAllHabits,
   Main,
   NoData,
   PageTitle,
@@ -14,18 +13,18 @@ import {
 import { getHabits } from "../../shared/services/habits/habitsApi";
 
 export function Habits() {
-  const [listHabits, setListHabits] = useState([]);
   const { userData } = useAuthContext();
-  const { toggleDivNewHabit } = useUserHabitsContext();
+  const { toggleDivNewHabit, lisOfUserHabits, setListOfUserHabits } =
+    useUserHabitsContext();
 
   const GetHabits = useCallback(async () => {
     try {
       const response = await getHabits(userData.token);
-      setListHabits(response);
+      setListOfUserHabits(response);
     } catch (err) {
       alert(`Erro ao listar seus hábitos - ${err.data.message}`);
     }
-  }, [userData.token]);
+  }, [userData.token, setListOfUserHabits]);
 
   useEffect(() => {
     GetHabits();
@@ -41,8 +40,8 @@ export function Habits() {
         </PageTitleWrapper>
         {toggleDivNewHabit && <AddNewHabit />}
 
-        {listHabits.length !== 0 ? (
-          <ListAllHabits listHabits={listHabits} GetHabits={GetHabits} />
+        {lisOfUserHabits.length !== 0 ? (
+          <ListOfHabits GetHabits={GetHabits} />
         ) : (
           <NoData>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para

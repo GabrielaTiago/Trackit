@@ -5,7 +5,7 @@ export * from "./Form/Form";
 export * from "./GoTo/GoTo";
 export * from "./Header/Header";
 export * from "./Input/Input";
-export * from "./ListHabits/ListHabits";
+export * from "../../pages/Habits/components/ListOfHabits/ListOfHabits";
 export * from "./LoadingButton/LoadingButton";
 export * from "./Logo/Logo";
 export * from "./Main/Main";
