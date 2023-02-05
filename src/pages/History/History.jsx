@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Footer,
   Header,
@@ -8,25 +7,26 @@ import {
   PageTitle,
   PageTitleWrapper,
 } from "../../shared/components";
+import { useLocalStorage } from "../../shared/hooks";
+import { getHistory } from "../../shared/services/history/historyApi";
 
 export function History() {
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  const { getItemFromLocalStorage } = useLocalStorage();
+  const { token } = getItemFromLocalStorage("userData");
   const [historyHabits, setHistoryHabits] = useState([]);
+
+  const GetHistory = useCallback(async () => {
+    try {
+      const response = await getHistory(token);
+      setHistoryHabits(response);
+    } catch (err) {
+      alert(`Erro ao listar seu histórico - ${err.data.message}`);
+    }
+  }, [token]);
 
   useEffect(() => {
     GetHistory();
-  }, []);
-
-  function GetHistory() {
-    const config = { headers: { Authorization: `Bearer ${userData.token}` } };
-    const promise = axios.get(
-      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/daily",
-      config
-    );
-
-    promise.then((res) => setHistoryHabits([...res.data]));
-    promise.catch((res) => alert(`${res.response.data.message}`));
-  }
+  }, [GetHistory]);
 
   return (
     <>
