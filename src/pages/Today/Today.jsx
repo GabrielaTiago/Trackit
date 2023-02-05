@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from "react";
-import { PageTitleWrapper, TodayProgress } from "./components";
+import { ListOfTodayHabits, PageTitleWrapper, TodayProgress } from "./components";
 import {
-  AllTodayHabits,
   Footer,
   Header,
   Main,
@@ -37,8 +36,8 @@ export function Today() {
           <PageTitle>{weekDay}</PageTitle>
           <TodayProgress />
         </PageTitleWrapper>
-
-        <AllTodayHabits />
+        
+        <ListOfTodayHabits />
       </Main>
       <Footer />
     </>
