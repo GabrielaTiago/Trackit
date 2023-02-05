@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Typography = styled.p`
+  text-align: center;
   font-size: 17.976px;
   line-height: 22px;
   color: #52b6ff;
