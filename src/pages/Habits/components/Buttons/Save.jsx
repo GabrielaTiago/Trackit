@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
-import {
-  useAuthContext,
-  useUserHabitsContext,
-} from "../../../../shared/contexts";
-import { createHabit } from "../../../../shared/services/habits/habitsApi";
 import { SaveBtn } from "./Styles";
+import { useUserHabitsContext } from "../../../../shared/contexts";
+import { useLocalStorage } from "../../../../shared/hooks";
+import { createHabit } from "../../../../shared/services/habits/habitsApi";
 
 export function Save() {
+  const { getItemFromLocalStorage } = useLocalStorage();
+  const userData = getItemFromLocalStorage("userData");
   const [loading, setLoading] = useState(false);
-  const { userData } = useAuthContext();
   const {
     toggleDivNewHabit,
     setToggleDivNewHabit,

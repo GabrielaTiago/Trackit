@@ -1,9 +1,10 @@
 import { BsTrash } from "react-icons/bs";
-import { useAuthContext } from "../../../../shared/contexts";
+import { useLocalStorage } from "../../../../shared/hooks";
 import { deleteHabit } from "../../../../shared/services/habits/habitsApi";
 
 export function Delete({ id, GetHabits }) {
-  const { userData } = useAuthContext();
+  const { getItemFromLocalStorage } = useLocalStorage();
+  const userData = getItemFromLocalStorage("userData");
 
   async function deleteThisHabit(id) {
     const confirmDelete = window.confirm("Deseja mesmo deletar este hábito?");

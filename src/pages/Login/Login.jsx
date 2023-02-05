@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../shared/contexts";
-import { signIn } from "../../shared/services/auth/authApi";
 import {
   AuthWrapper,
   Button,
@@ -11,13 +9,15 @@ import {
   LoadingButton,
   Logo,
 } from "../../shared/components";
+import { useLocalStorage } from "../../shared/hooks";
+import { signIn } from "../../shared/services/auth/authApi";
 
 export function Login() {
+  const { setValueToLocalStorage } = useLocalStorage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
-  const { setUserData } = useAuthContext();
   const navigate = useNavigate();
 
   function handleLogin(event) {
@@ -31,7 +31,7 @@ export function Login() {
     try {
       const response = await signIn({ email, password });
       if (response) {
-        setUserData(response);
+        setValueToLocalStorage("userData", response);
         navigate("/hoje");
       }
     } catch (err) {
@@ -71,4 +71,3 @@ export function Login() {
     </AuthWrapper>
   );
 }
-

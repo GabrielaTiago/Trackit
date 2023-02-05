@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { AddNewHabit, ListOfHabits, New } from "./components";
-import { useAuthContext, useUserHabitsContext } from "../../shared/contexts";
+import { useUserHabitsContext } from "../../shared/contexts";
 import {
   Footer,
   Header,
@@ -9,10 +9,12 @@ import {
   PageTitle,
   PageTitleWrapper,
 } from "../../shared/components";
+import { useLocalStorage } from "../../shared/hooks";
 import { getHabits } from "../../shared/services/habits/habitsApi";
 
 export function Habits() {
-  const { userData } = useAuthContext();
+  const { getItemFromLocalStorage } = useLocalStorage();
+  const userData = getItemFromLocalStorage("userData");
   const { toggleDivNewHabit, lisOfUserHabits, setListOfUserHabits } =
     useUserHabitsContext();
 
