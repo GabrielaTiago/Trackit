@@ -21,7 +21,7 @@ const Head = styled.header`
   align-items: center;
   position: fixed;
   top: 0;
-  padding: 0 18px;
+  padding: 0 5%;
   background-color: #126ba5;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
