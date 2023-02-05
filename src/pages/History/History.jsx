@@ -8,10 +8,9 @@ import {
   PageTitle,
   PageTitleWrapper,
 } from "../../shared/components";
-import { useAuthContext } from "../../shared/contexts";
 
 export function History() {
-  const { userData } = useAuthContext();
+  const userData = JSON.parse(localStorage.getItem("userData"));
   const [historyHabits, setHistoryHabits] = useState([]);
 
   useEffect(() => {

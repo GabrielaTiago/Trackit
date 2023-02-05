@@ -1,8 +1,9 @@
+import { useLocalStorage } from "../../hooks";
 import { AppTitle, Container, UserImage } from "./Styles";
-import { useAuthContext } from "../../contexts";
 
 export function Header() {
-  const { userData } = useAuthContext();
+  const { getItemFromLocalStorage } = useLocalStorage();
+  const userData = getItemFromLocalStorage("userData");
   const { image } = userData;
 
   return (

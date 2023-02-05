@@ -1,10 +1,15 @@
 import { BsCheckLg } from "react-icons/bs";
-import { useAuthContext, useHabitsContext } from "../../../../shared/contexts";
-import { checkHabit, uncheckHabit } from "../../../../shared/services/habits/habitsApi";
 import { Container } from "./Styles";
+import { useHabitsContext } from "../../../../shared/contexts";
+import { useLocalStorage } from "../../../../shared/hooks";
+import {
+  checkHabit,
+  uncheckHabit,
+} from "../../../../shared/services/habits/habitsApi";
 
 export function Check({ id, index, done }) {
-  const { userData } = useAuthContext();
+  const { getItemFromLocalStorage } = useLocalStorage();
+  const userData = getItemFromLocalStorage("userData");
   const { todayHabits, setTodayHabits } = useHabitsContext();
 
   function checkAsDone(id, index) {

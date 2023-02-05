@@ -1,10 +1,9 @@
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
 import {
-  AuthContextProvider,
   HabistsContexctProvider,
   ProgressContextProvider,
-  UserHabistsContexctProvider
+  UserHabistsContexctProvider,
 } from "./shared/contexts";
 
 export function App() {
@@ -12,11 +11,9 @@ export function App() {
     <ProgressContextProvider>
       <UserHabistsContexctProvider>
         <HabistsContexctProvider>
-          <AuthContextProvider>
-            <BrowserRouter>
-              <AppRoutes />
-            </BrowserRouter>
-          </AuthContextProvider>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
         </HabistsContexctProvider>
       </UserHabistsContexctProvider>
     </ProgressContextProvider>
