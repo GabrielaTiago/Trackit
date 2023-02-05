@@ -7,7 +7,6 @@ const Container = styled.form`
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-bottom: 25px;
 `;
 
 export { Container };

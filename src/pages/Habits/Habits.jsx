@@ -1,6 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { AddNewHabit, ListOfHabits } from "./components";
-import { New } from "./components/Buttons";
+import { AddNewHabit, ListOfHabits, New } from "./components";
 import { useAuthContext, useUserHabitsContext } from "../../shared/contexts";
 import {
   Footer,
