@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import {
   AuthWrapper,
   Button,
@@ -35,7 +36,12 @@ export function Login() {
         navigate("/hoje");
       }
     } catch (err) {
-      alert(`${err.data.message}`);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${err.data.message}`,
+        confirmButtonColor: "#52B6FF",
+      });
     } finally {
       setLoading(false);
       setDisable(false);
