@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
+  AppTitle,
   AuthWrapper,
   Button,
   Form,
@@ -35,7 +36,7 @@ export function SingUp() {
       navigate("/");
     } catch (err) {
       let error;
-      if(err.status === 409) {
+      if (err.status === 409) {
         error = err.data.message;
       } else {
         error = err.data.details[0];
@@ -44,7 +45,7 @@ export function SingUp() {
         icon: "error",
         title: "Oops...",
         text: `${error}`,
-        confirmButtonColor: "#52B6FF"
+        confirmButtonColor: "#52B6FF",
       });
     } finally {
       setLoading(false);
@@ -54,7 +55,10 @@ export function SingUp() {
 
   return (
     <AuthWrapper>
-      <Logo />
+      <div>
+        <Logo />
+        <AppTitle />
+      </div>
       <Form onSubmit={handleSingUp}>
         <Input
           type={"email"}
