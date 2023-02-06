@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUp } from "../../shared/services/auth/authApi";
+import Swal from "sweetalert2";
 import {
   AuthWrapper,
   Button,
@@ -10,6 +10,7 @@ import {
   LoadingButton,
   Logo,
 } from "../../shared/components";
+import { signUp } from "../../shared/services/auth/authApi";
 
 export function SingUp() {
   const [email, setEmail] = useState("");
@@ -22,7 +23,6 @@ export function SingUp() {
 
   function handleSingUp(event) {
     event.preventDefault();
-
     signUpUser();
   }
 
@@ -31,11 +31,21 @@ export function SingUp() {
     setDisable(true);
 
     try {
-      const response = await signUp({ email, password, name, image });
-
-      if (response) navigate("/");
+      await signUp({ email, password, name, image });
+      navigate("/");
     } catch (err) {
-      alert(`${err.data.details[0]}`);
+      let error;
+      if(err.status === 409) {
+        error = err.data.message;
+      } else {
+        error = err.data.details[0];
+      }
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error}`,
+        confirmButtonColor: "#52B6FF"
+      });
     } finally {
       setLoading(false);
       setDisable(false);

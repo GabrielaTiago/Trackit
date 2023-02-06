@@ -8,7 +8,6 @@ export function Input({ type, placeholder, value, onChange, disabled }) {
       value={value}
       onChange={onChange}
       disabled={disabled}
-      required
     />
   );
 }
