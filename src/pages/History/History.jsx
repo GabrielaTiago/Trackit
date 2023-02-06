@@ -9,16 +9,17 @@ import {
 } from "../../shared/components";
 import { useLocalStorage } from "../../shared/hooks";
 import { getHistory } from "../../shared/services/history/historyApi";
+import { useHistoryContext } from "../../shared/contexts";
 
 export function History() {
   const { getItemFromLocalStorage } = useLocalStorage();
   const { token } = getItemFromLocalStorage("userData");
-  const [historyHabits, setHistoryHabits] = useState([]);
+  const { setHabitsHistory } = useHistoryContext();
 
   const GetHistory = useCallback(async () => {
     try {
       const response = await getHistory(token);
-      setHistoryHabits(response);
+      setHabitsHistory(response);
     } catch (err) {
       alert(`Erro ao listar seu histórico - ${err.data.message}`);
     }
@@ -36,7 +37,7 @@ export function History() {
           <PageTitle>Histórico</PageTitle>
         </PageTitleWrapper>
 
-        <Calendaring historyHabits={historyHabits} />
+        <Calendaring />
       </Main>
       <Footer />
     </>

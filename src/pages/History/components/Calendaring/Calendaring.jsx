@@ -1,15 +1,17 @@
 import "react-calendar/dist/Calendar.css";
 import { Calendar } from "react-calendar";
 import { Container } from "./Styles";
+import { useHistoryContext } from "../../../../shared/contexts";
 import { formatDay } from "../../../../shared/utils";
 
-export function Calendaring({ historyHabits }) {
-  
+export function Calendaring() {
+  const { habitsHistory } = useHistoryContext();
+
   function formatDays(date) {
     const DAY = formatDay(date);
     const DD = DAY.slice(0, 2);
 
-    for (const key of historyHabits) {
+    for (const key of habitsHistory) {
       const { day, habits } = key;
 
       if (DAY === day) {
