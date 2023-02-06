@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  max-width: 500px;
-  max-height: 500px;
-  margin-bottom: 15px;
+  max-width: 100%;
+  max-height: 700px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
   .react-calendar {

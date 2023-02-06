@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { Calendaring } from "./components";
+import { useCallback, useEffect } from "react";
+import { Calendaring, Habit, HistoryWrapper } from "./components";
 import {
   Footer,
   Header,
@@ -7,14 +7,14 @@ import {
   PageTitle,
   PageTitleWrapper,
 } from "../../shared/components";
+import { useHistoryContext } from "../../shared/contexts";
 import { useLocalStorage } from "../../shared/hooks";
 import { getHistory } from "../../shared/services/history/historyApi";
-import { useHistoryContext } from "../../shared/contexts";
 
 export function History() {
   const { getItemFromLocalStorage } = useLocalStorage();
   const { token } = getItemFromLocalStorage("userData");
-  const { setHabitsHistory } = useHistoryContext();
+  const { setHabitsHistory, selectDay } = useHistoryContext();
 
   const GetHistory = useCallback(async () => {
     try {
@@ -23,7 +23,7 @@ export function History() {
     } catch (err) {
       alert(`Erro ao listar seu histórico - ${err.data.message}`);
     }
-  }, [token]);
+  }, [token, setHabitsHistory]);
 
   useEffect(() => {
     GetHistory();
@@ -37,7 +37,10 @@ export function History() {
           <PageTitle>Histórico</PageTitle>
         </PageTitleWrapper>
 
-        <Calendaring />
+        <HistoryWrapper>
+          <Calendaring />
+          {selectDay && <Habit />}
+        </HistoryWrapper>
       </Main>
       <Footer />
     </>

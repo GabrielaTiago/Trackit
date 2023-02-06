@@ -5,7 +5,7 @@ import { useHistoryContext } from "../../../../shared/contexts";
 import { formatDay } from "../../../../shared/utils";
 
 export function Calendaring() {
-  const { habitsHistory } = useHistoryContext();
+  const { habitsHistory, setSelectDay, setDayHabits } = useHistoryContext();
 
   function formatDays(date) {
     const DAY = formatDay(date);
@@ -19,10 +19,19 @@ export function Calendaring() {
           ? "finished"
           : "unfinished";
 
-        return <div className={className}>{DD}</div>;
+        return (
+          <div className={className} onClick={() => handleClick(day, habits)}>
+            {DD}
+          </div>
+        );
       }
     }
     return <div className="no-habits">{DD}</div>;
+  }
+
+  function handleClick(day, habits) {
+    setSelectDay(true);
+    setDayHabits({ day, habits });
   }
 
   return (
