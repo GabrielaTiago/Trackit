@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+import Swal from "sweetalert2";
 import { Calendaring, Habit, HistoryWrapper } from "./components";
 import {
   Footer,
@@ -21,7 +22,12 @@ export function History() {
       const response = await getHistory(token);
       setHabitsHistory(response);
     } catch (err) {
-      alert(`Erro ao listar seu histórico - ${err.data.message}`);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao listar seus histórico de hábitos",
+        text: `${err.data.message}`,
+        confirmButtonColor: "#52B6FF",
+      });
     }
   }, [token, setHabitsHistory]);
 

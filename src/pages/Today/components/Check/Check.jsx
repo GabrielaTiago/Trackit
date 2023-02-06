@@ -1,4 +1,5 @@
 import { BsCheckLg } from "react-icons/bs";
+import Swal from "sweetalert2";
 import { Container } from "./Styles";
 import { useHabitsContext } from "../../../../shared/contexts";
 import { useLocalStorage } from "../../../../shared/hooks";
@@ -35,7 +36,12 @@ export function Check({ id, index, done }) {
       await checkHabit(id, token);
       setTodayHabits([...todayHabits]);
     } catch (err) {
-      alert(`Erro ao marcar seu hábito como feito - ${err.data.message}`);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao marcar seu hábito como feito",
+        text: `${err.data.message}`,
+        confirmButtonColor: "#52B6FF",
+      });
     }
   }
 
@@ -44,7 +50,12 @@ export function Check({ id, index, done }) {
       await uncheckHabit(id, token);
       setTodayHabits([...todayHabits]);
     } catch (err) {
-      alert(`Erro ao marcar seu hábito como não feito - ${err.data.message}`);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao marcar seu hábito como não feito",
+        text: `${err.data.message}`,
+        confirmButtonColor: "#52B6FF",
+      });
     }
   }
 

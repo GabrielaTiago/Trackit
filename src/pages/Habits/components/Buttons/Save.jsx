@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import Swal from "sweetalert2";
 import { SaveBtn } from "./Styles";
 import { useUserHabitsContext } from "../../../../shared/contexts";
 import { useLocalStorage } from "../../../../shared/hooks";
@@ -23,32 +24,54 @@ export function Save() {
   } = useUserHabitsContext();
 
   const handleCLick = () => {
-    saveHabit();
+    validations(habitName, daysSelection);
   };
 
+  function validations(habitName, daysSelection) {
+    if (habitName === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Preencha o campo 'Nome do hábito'",
+      });
+      return;
+    }
+    if (daysSelection.length === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "É obrigatória a seleceção de no mínimo 1 dia",
+      });
+      return;
+    }
+    saveHabit();
+  }
+
   async function saveHabit() {
-    if (habitName.length !== 0 && daysSelection.length !== 0) {
-      setDisabled(true);
-      setLoading(true);
+    setDisabled(true);
+    setLoading(true);
 
-      try {
-        const response = await createHabit(
-          { name: habitName, days: daysSelection },
-          token
-        );
+    try {
+      const response = await createHabit(
+        { name: habitName, days: daysSelection },
+        token
+      );
 
-        if (response) {
-          setListOfUserHabits([...lisOfUserHabits, response]);
-          setHabitName("");
-          setDaysSelection([]);
-          setToggleDivNewHabit(!toggleDivNewHabit);
-        }
-      } catch (err) {
-        alert(`${err.data.message}`);
-      } finally {
-        setDisabled(false);
-        setLoading(false);
+      if (response) {
+        setListOfUserHabits([...lisOfUserHabits, response]);
+        setHabitName("");
+        setDaysSelection([]);
+        setToggleDivNewHabit(!toggleDivNewHabit);
       }
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${err.data.message}`,
+      });
+    } finally {
+      setDisabled(false);
+      setLoading(false);
     }
   }
 

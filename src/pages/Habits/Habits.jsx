@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+import Swal from "sweetalert2";
 import { AddNewHabit, ListOfHabits, New } from "./components";
 import { useUserHabitsContext } from "../../shared/contexts";
 import {
@@ -23,7 +24,12 @@ export function Habits() {
       const response = await getHabits(token);
       setListOfUserHabits(response);
     } catch (err) {
-      alert(`Erro ao listar seus hábitos - ${err.data.message}`);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao listar seus hábitos",
+        text: `${err.data.message}`,
+        confirmButtonColor: "#52B6FF",
+      });
     }
   }, [token, setListOfUserHabits]);
 

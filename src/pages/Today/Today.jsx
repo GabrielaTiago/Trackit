@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+import Swal from "sweetalert2";
 import {
   ListOfTodayHabits,
   PageTitleWrapper,
@@ -21,7 +22,12 @@ export function Today() {
       const response = await getTodayHabits(token);
       setTodayHabits(response);
     } catch (err) {
-      alert(`Erro ao listar seus hábitos de hoje - ${err.data.message}`);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao listar seus hábitos de hoje",
+        text: `${err.data.message}`,
+        confirmButtonColor: "#52B6FF",
+      });
     }
   }, [token, setTodayHabits]);
 
