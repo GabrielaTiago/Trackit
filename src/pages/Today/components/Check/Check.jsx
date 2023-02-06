@@ -9,24 +9,24 @@ import {
 
 export function Check({ id, index, done }) {
   const { getItemFromLocalStorage } = useLocalStorage();
-  const userData = getItemFromLocalStorage("userData");
+  const { token } = getItemFromLocalStorage("userData");
   const { todayHabits, setTodayHabits } = useHabitsContext();
 
   function checkAsDone(id, index) {
     const localValue = todayHabits[index];
 
-    if (localValue.done === true) {
+    if (done) {
       localValue.done = !localValue.done;
       localValue.currentSequence = localValue.currentSequence - 1;
       localValue.highestSequence = localValue.highestSequence - 1;
 
-      markAsUndone(id, userData.token);
+      markAsUndone(id, token);
     } else {
       localValue.done = !localValue.done;
       localValue.currentSequence = localValue.currentSequence + 1;
       localValue.highestSequence = localValue.highestSequence + 1;
 
-      markAsDone(id, userData.token);
+      markAsDone(id, token);
     }
   }
 
@@ -44,7 +44,7 @@ export function Check({ id, index, done }) {
       await uncheckHabit(id, token);
       setTodayHabits([...todayHabits]);
     } catch (err) {
-      alert(`Erro ao marcar seu hábito como feito - ${err.data.message}`);
+      alert(`Erro ao marcar seu hábito como não feito - ${err.data.message}`);
     }
   }
 

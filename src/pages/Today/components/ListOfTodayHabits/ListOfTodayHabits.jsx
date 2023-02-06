@@ -7,7 +7,6 @@ export function ListOfTodayHabits() {
   return (
     <Container>
       {todayHabits.map((habit, index) => {
-        console.log(habit);
         const { id, name, done, currentSequence, highestSequence } = habit;
         return (
           <Habit

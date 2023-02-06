@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
 import { Container } from "./Styles";
+import { ProgressBar } from "./ProgressBar";
 import { GoTo } from "../GoTo/GoTo";
 import { useHabitsContext, useProgressContext } from "../../contexts";
-import { ProgressBar } from "./ProgressBar";
 
 export function Footer() {
   const { setProgress } = useProgressContext();
@@ -17,7 +17,11 @@ export function Footer() {
       );
     }
 
-    setProgress(Math.round((progressValue * 100) / todayHabits.length));
+    const progressPercentage = (progressValue * 100) / todayHabits.length;
+    const roundedProgress = Math.round(progressPercentage);
+
+    setProgress(roundedProgress);
+
   }, [todayHabits, setProgress]);
 
   useEffect(() => {
