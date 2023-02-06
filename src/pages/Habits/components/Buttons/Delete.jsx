@@ -4,14 +4,14 @@ import { deleteHabit } from "../../../../shared/services/habits/habitsApi";
 
 export function Delete({ id, GetHabits }) {
   const { getItemFromLocalStorage } = useLocalStorage();
-  const userData = getItemFromLocalStorage("userData");
+  const { token } = getItemFromLocalStorage("userData");
 
   async function deleteThisHabit(id) {
     const confirmDelete = window.confirm("Deseja mesmo deletar este hábito?");
 
     if (confirmDelete) {
       try {
-        await deleteHabit(id, userData.token);
+        await deleteHabit(id, token);
         GetHabits();
       } catch (err) {
         alert(`Erro ao deletar seu hábito - ${err.data.message}`);

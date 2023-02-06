@@ -7,7 +7,7 @@ import { createHabit } from "../../../../shared/services/habits/habitsApi";
 
 export function Save() {
   const { getItemFromLocalStorage } = useLocalStorage();
-  const userData = getItemFromLocalStorage("userData");
+  const { token } = getItemFromLocalStorage("userData");
   const [loading, setLoading] = useState(false);
   const {
     toggleDivNewHabit,
@@ -34,7 +34,7 @@ export function Save() {
       try {
         const response = await createHabit(
           { name: habitName, days: daysSelection },
-          userData.token
+          token
         );
 
         if (response) {

@@ -14,18 +14,18 @@ import { getHabits } from "../../shared/services/habits/habitsApi";
 
 export function Habits() {
   const { getItemFromLocalStorage } = useLocalStorage();
-  const userData = getItemFromLocalStorage("userData");
+  const { token } = getItemFromLocalStorage("userData");
   const { toggleDivNewHabit, lisOfUserHabits, setListOfUserHabits } =
     useUserHabitsContext();
 
   const GetHabits = useCallback(async () => {
     try {
-      const response = await getHabits(userData.token);
+      const response = await getHabits(token);
       setListOfUserHabits(response);
     } catch (err) {
       alert(`Erro ao listar seus hábitos - ${err.data.message}`);
     }
-  }, [userData.token, setListOfUserHabits]);
+  }, [token, setListOfUserHabits]);
 
   useEffect(() => {
     GetHabits();
