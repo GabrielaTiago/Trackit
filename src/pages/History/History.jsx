@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
+import { Calendaring } from "./components";
 import {
   Footer,
   Header,
   Main,
-  NoData,
   PageTitle,
   PageTitleWrapper,
 } from "../../shared/components";
@@ -35,9 +35,8 @@ export function History() {
         <PageTitleWrapper>
           <PageTitle>Histórico</PageTitle>
         </PageTitleWrapper>
-        <NoData>
-          Em breve você poderá ver o histórico dos seus hábitos aqui!
-        </NoData>
+
+        <Calendaring historyHabits={historyHabits} />
       </Main>
       <Footer />
     </>
