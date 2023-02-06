@@ -2,6 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
 import {
   HabistsContexctProvider,
+  HistoryContextProvider,
   ProgressContextProvider,
   UserHabistsContexctProvider,
 } from "./shared/contexts";
@@ -9,13 +10,15 @@ import {
 export function App() {
   return (
     <ProgressContextProvider>
-      <UserHabistsContexctProvider>
-        <HabistsContexctProvider>
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </HabistsContexctProvider>
-      </UserHabistsContexctProvider>
+      <HistoryContextProvider>
+        <UserHabistsContexctProvider>
+          <HabistsContexctProvider>
+            <BrowserRouter>
+              <AppRoutes />
+            </BrowserRouter>
+          </HabistsContexctProvider>
+        </UserHabistsContexctProvider>
+      </HistoryContextProvider>
     </ProgressContextProvider>
   );
 }
