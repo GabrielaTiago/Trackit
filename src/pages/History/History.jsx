@@ -1,32 +1,33 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import { Calendaring, Habit, HistoryWrapper } from "./components";
 import {
   Footer,
   Header,
   Main,
-  NoData,
   PageTitle,
   PageTitleWrapper,
 } from "../../shared/components";
+import { useHistoryContext } from "../../shared/contexts";
+import { useLocalStorage } from "../../shared/hooks";
+import { getHistory } from "../../shared/services/history/historyApi";
 
 export function History() {
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const [historyHabits, setHistoryHabits] = useState([]);
+  const { getItemFromLocalStorage } = useLocalStorage();
+  const { token } = getItemFromLocalStorage("userData");
+  const { setHabitsHistory, selectDay } = useHistoryContext();
+
+  const GetHistory = useCallback(async () => {
+    try {
+      const response = await getHistory(token);
+      setHabitsHistory(response);
+    } catch (err) {
+      alert(`Erro ao listar seu histórico - ${err.data.message}`);
+    }
+  }, [token, setHabitsHistory]);
 
   useEffect(() => {
     GetHistory();
-  }, []);
-
-  function GetHistory() {
-    const config = { headers: { Authorization: `Bearer ${userData.token}` } };
-    const promise = axios.get(
-      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/daily",
-      config
-    );
-
-    promise.then((res) => setHistoryHabits([...res.data]));
-    promise.catch((res) => alert(`${res.response.data.message}`));
-  }
+  }, [GetHistory]);
 
   return (
     <>
@@ -35,9 +36,11 @@ export function History() {
         <PageTitleWrapper>
           <PageTitle>Histórico</PageTitle>
         </PageTitleWrapper>
-        <NoData>
-          Em breve você poderá ver o histórico dos seus hábitos aqui!
-        </NoData>
+
+        <HistoryWrapper>
+          <Calendaring />
+          {selectDay && <Habit />}
+        </HistoryWrapper>
       </Main>
       <Footer />
     </>
