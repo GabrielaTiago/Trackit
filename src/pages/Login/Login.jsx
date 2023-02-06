@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
+  AppTitle,
   AuthWrapper,
   Button,
   Form,
@@ -50,7 +51,10 @@ export function Login() {
 
   return (
     <AuthWrapper>
-      <Logo />
+      <div>
+        <Logo />
+        <AppTitle />
+      </div>
       <Form onSubmit={handleLogin}>
         <Input
           type={"email"}

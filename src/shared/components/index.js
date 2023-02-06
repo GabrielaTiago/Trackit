@@ -1,3 +1,4 @@
+export * from "./AppTitle/AppTitle";
 export * from "./AuthWrapper/AuthWrapper";
 export * from "./Button/Button";
 export * from "./Footer/Footer";
