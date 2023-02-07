@@ -33,7 +33,7 @@ export function Login() {
     try {
       const response = await signIn({ email, password });
       if (response) {
-        setValueToLocalStorage("userData", response);
+        setValueToLocalStorage("userData", { ...response, password: null });
         navigate("/hoje");
       }
     } catch (err) {
