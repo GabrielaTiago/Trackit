@@ -83,7 +83,7 @@ export function SingUp() {
         />
         <Input
           type={"text"}
-          placeholder={"foto"}
+          placeholder={"url de uma imagem"}
           value={image}
           onChange={(e) => setImage(e.target.value)}
           disabled={disable}

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   max-width: 100%;
-  max-height: 700px;
+  max-height: 900px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
   .react-calendar {
@@ -19,8 +19,7 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      height: 100%;
+      aspect-ratio: 1;
       border-radius: 50%;
       cursor: pointer;
     }
@@ -56,7 +55,6 @@ const Container = styled.div`
     .react-calendar__tile {
       max-height: 75px;
       padding: 2%;
-      aspect-ratio: 1;
       color: inherit;
     }
     .react-calendar__tile:enabled:hover,
