@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+<p align="center"><img src="public/favicon.ico" height="80px"/></p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# <p align="center">Trackit</p>
 
-## Available Scripts
+#### <p align="center">App de acompanhamentos de hábitos</p>
 
-In the project directory, you can run:
+<p align="center">
+   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"  height="30px"/>
 
-### `npm start`
+   <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"  height="30px"/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"  height="30px"/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"  height="30px"/>
 
-### `npm test`
+   <img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E"  height="30px"/>
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+$~$
 
-### `npm run build`
+***
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### :clipboard: Descrição
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Este projeto é um aplicativo web desenvolvido com React que oferece uma forma eficiente de acompanhar os hábitos diários. Com uma interface intuitiva, os usuários  podem criar uma conta e começar a registrar seus hábitos. É possível adicionar, excluir ou visualizar todos os seus hábitos registrados. Além disso, os usuários podem marcar seus hábitos como concluídos ou não concluídos e ver seu progresso diário. Um calendário interativo está disponível para que se possa acompanhar quais dias eles completaram todos os hábitos.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 📊 [Acesse aqui](https://trackit-gabrielatiago.vercel.app/)
 
-### `npm run eject`
+***
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### :rocket: Rodando o projeto localmente
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Este projeto foi iniciado com [Create React App](https://github.com/facebook/create-react-app), portanto, certifique-se de ter a última versão estável do [Node.js](https://nodejs.org/en/download) e [npm](https://www.npmjs.com/) rodando localmente.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Primeiro de tudo, clone este projeto ou faça o download do ZIP.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Para realizar o clone, no terminal de sua máquina, utilize o [git](https://git-scm.com/) e insira o seguinte comando:
 
-## Learn More
+```bash
+    git clone git@github.com:GabrielaTiago/Trackit.git
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Entre na pasta do projeto
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+    cd Trackit
+```
 
-### Code Splitting
+Execute o seguinte comando para instalar as dependências.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+    npm install
+```
 
-### Analyzing the Bundle Size
+Depois de instalar as dependências, execute o comando para iniciar a aplicação.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+    npm run start
+```
 
-### Making a Progressive Web App
+A aplicação será iniciada em "http://localhost:3000" no seu navegador.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+***
 
-### Advanced Configuration
+### :computer: Telas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+##### Desktop:
 
-### Deployment
+![viewing the app on a large screen](screens/images/large-screen.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+##### Tablet:
 
-### `npm run build` fails to minify
+![viewing the app on a medium screen](screens/images/medium-screen.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##### Mobile:
+
+![viewing the app on a mobile screen](screens/images/mobile-screen.gif)
+
+---
+
+### 🎮 Usando
+
+https://user-images.githubusercontent.com/77814822/217135592-217642c6-108d-41bd-8672-c945ad3ba844.mp4
+
+***
+
+### :books: Lições Aprendidas
+
+- FLuxo de login e cadastro
+- Consumir API com axios
+- SPA
+- Links internos
+- Rotas
+- Paginação
+- Componentização
+- Custom Hooks
+- Renderização condicional
+- useMemo
+- useCallback
+- Local Storage
+- Styled Components
+- Dayjs
+- React-calendar
+- React-circular-progressbar
+- React-loader-spinner
+- SweetAlert2
+
+***
+
+### :bulb: Reconhecimentos
+
+- [Badges para Github](https://github.com/alexandresanlim/Badges4-README.md-Profile#-database-)
+- [README Inspiração de README](https://gist.github.com/luanalessa/7f98467a5ed62d00dcbde67d4556a1e4#file-readme-md)
+- [Driven Education](https://www.driven.com.br)
+
+***
+
+### 👩‍🦱 Autora
+
+- Gabriela Tiago é uma aluna de desenvolvimento web de Fullstack na Driven Education. Percorrendo o caminho do conhecimento, buscando aprimorar suas habilidades técnicas e de softskills, para que ela possa melhorar o trabalho que desenvolve.
+
+$~$
+
+[🔝 De volta ao topo](#trackit)
